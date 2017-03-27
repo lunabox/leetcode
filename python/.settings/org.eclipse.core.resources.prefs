@@ -1,8 +1,12 @@
 eclipse.preferences.version=1
 encoding//problems/__init__.py=utf8
 encoding//problems/listnode.py=utf8
+encoding//problems/s121_Best_Time_to_Buy_and_Sell_Stock.py=utf8
+encoding//problems/s122_Best_Time_to_Buy_and_Sell_Stock_II.py=utf8
 encoding//problems/s374_Guess_Number_Higher_or_Lower.py=utf8
+encoding//problems/s401_Binary_Watch.py=utf8
 encoding//problems/s463_Island_Perimeter.py=utf8
 encoding//problems/s530_Minimum_Absolute_Difference_in_BST.py=utf8
+encoding//problems/s542_01_Matrix.py=utf8
 encoding//problems/treenode.py=utf8
 encoding/main.py=utf8
