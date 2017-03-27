@@ -1,11 +1,15 @@
 # coding:utf8
-from problems.s198_House_Robber import Solution
+from problems.s110_Balanced_Binary_Tree import Solution
+from problems.treenode import TreeNode
 
 
 if __name__ == '__main__':
     s = Solution()
-    num = list()
-    num.extend([2, 3, 4, 15])
-    #     print s.twoSum(num, 17)
-
-    print s.rob([3, 2, 1, 5])
+    
+    t1 = TreeNode(1)
+#     t1.left = TreeNode(9)
+#     t1.left.left = TreeNode(15)
+    t1.right = TreeNode(2)
+    t1.right.right = TreeNode(3)
+    
+    print s.isBalanced(t1)
