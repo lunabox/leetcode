@@ -1,5 +1,5 @@
 # coding:utf8
-from problems.s110_Balanced_Binary_Tree import Solution
+from problems.s111_Minimum_Depth_of_Binary_Tree import Solution
 from problems.treenode import TreeNode
 
 
@@ -12,4 +12,4 @@ if __name__ == '__main__':
     t1.right = TreeNode(2)
     t1.right.right = TreeNode(3)
     
-    print s.isBalanced(t1)
+    print s.minDepth(t1)
