@@ -1,6 +1,9 @@
 import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.math.max
+import kotlin.math.min
 
 class TreeProblems {
     /**
@@ -166,5 +169,207 @@ class TreeProblems {
         return null
     }
 
+    /**
+     * https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
+     * 给定一个二叉树，返回它的 前序 遍历，使用迭代法
+     */
+    fun preorderTraversal(root: TreeNode?): List<Int> {
+        val list = ArrayList<Int>()
+        if (root == null) {
+            return list
+        }
+        val stack = LinkedList<TreeNode>()
+        stack.addFirst(root)
+        while (stack.isNotEmpty()) {
+            val node = stack.pollFirst()
+            list.add(node.`val`)
+            if (node.right != null) {
+                stack.addFirst(node.right)
+            }
+            if (node.left != null) {
+                stack.addFirst(node.left)
+            }
+        }
+        return list
+    }
 
+    /**
+     * https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+     * 迭代法，中序遍历
+     */
+    fun inorderTraversal(root: TreeNode?): List<Int> {
+        if (root == null) {
+            return emptyList()
+        }
+        val list = ArrayList<Int>()
+        val stack = LinkedList<TreeNode>()
+        var p: TreeNode? = root
+        while (p != null || stack.isNotEmpty()) {
+            while (p != null) {
+                stack.addFirst(p)
+                p = p.left
+            }
+            val n = stack.pollFirst()
+            list.add(n.`val`)
+            p = n.right
+        }
+        return list
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+     * 迭代法的后续遍历
+     */
+    fun postorderTraversal(root: TreeNode?): List<Int> {
+        if (root == null) {
+            return emptyList()
+        }
+        val result = ArrayList<Int>()
+        val stack = LinkedList<TreeNode>()
+        stack.addFirst(root)
+        while (stack.isNotEmpty()) {
+            val node = stack.pollFirst()
+            result.add(0, node.`val`)
+            node.left?.let {
+                stack.addFirst(it)
+            }
+            node.right?.let {
+                stack.addFirst(it)
+            }
+        }
+        return result
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/
+     */
+    fun minDiffInBST(root: TreeNode?): Int {
+        var last = Int.MAX_VALUE
+        var minValue = Int.MAX_VALUE
+        val stack = LinkedList<TreeNode>()
+        var p: TreeNode? = root
+        while (p != null || stack.isNotEmpty()) {
+            while (p != null) {
+                stack.addFirst(p)
+                p = p.left
+            }
+            val n = stack.pollFirst()
+            if (last != Int.MAX_VALUE) {
+                minValue = min(minValue, n.`val` - last)
+            }
+            last = n.`val`
+            p = n.right
+        }
+        return minValue
+    }
+
+    var preNode: TreeNode? = null
+    var minValue = Int.MAX_VALUE
+    /**
+     * 递归实现
+     */
+    fun minDiffInBSTStack(root: TreeNode?): Int {
+        dfs(root)
+        return minValue
+    }
+
+    private fun dfs(root: TreeNode?) {
+        root?.let {
+            dfs(it.left)
+            if (preNode != null) {
+                minValue = min(minValue, it.`val` - preNode!!.`val`)
+            }
+            preNode = root
+            dfs(it.right)
+        }
+    }
+
+    var last = Long.MIN_VALUE
+
+    /**
+     * https://leetcode-cn.com/problems/validate-binary-search-tree/
+     */
+    fun isValidBST(root: TreeNode?): Boolean {
+        if (root == null) {
+            return true
+        }
+        if (isValidBST(root.left)) {
+            if (root.`val` > last) {
+                last = root.`val`.toLong()
+                return isValidBST(root.right)
+            }
+        }
+        return false
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/
+     * 给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）
+     */
+    fun findMode(root: TreeNode?): IntArray {
+        val map = HashMap<Int, Int>()
+        val result = ArrayList<Int>()
+        val stack = LinkedList<TreeNode>()
+        var p = root
+        while (p != null || stack.isNotEmpty()) {
+            while (p != null) {
+                stack.addFirst(p)
+                p = p.left
+            }
+            val node = stack.pollFirst()
+            map[node.`val`] = if (node.`val` in map.keys) map[node.`val`]!! + 1 else 1
+            p = node.right
+        }
+        val maxCount = map.values.max()
+        map.forEach { (t, u) ->
+            if (u == maxCount) {
+                result.add(t)
+            }
+        }
+        return result.toIntArray()
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/
+     */
+    fun kthSmallest(root: TreeNode?, k: Int): Int {
+        val stack = LinkedList<TreeNode>()
+        var p = root
+        var count = 0
+        while (p != null || stack.isNotEmpty()) {
+            while (p != null) {
+                stack.addFirst(p)
+                p = p.left
+            }
+            val node = stack.pollFirst()
+            if (++count == k) {
+                return node.`val`
+            }
+            p = node.right
+        }
+        return 0
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/
+     */
+    fun findSecondMinimumValue(root: TreeNode?): Int {
+        return search(root, root!!.`val`)
+    }
+
+    private fun search(root: TreeNode?, value: Int): Int {
+        if (root == null) {
+            return -1
+        }
+        if (root.`val` > value) {
+            return root.`val`
+        }
+
+        val left = search(root.left, value)
+        val right = search(root.right, value)
+        if (left > value && right > value) {
+            return min(left, right)
+        }
+        return max(left, right)
+    }
 }
