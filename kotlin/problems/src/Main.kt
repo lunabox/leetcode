@@ -1,4 +1,5 @@
 import data.structure.RangeModule
+import java.util.*
 
 fun main() {
 //    val lc = LeetCodeKt()
@@ -18,6 +19,7 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
 //    val sp = StringProblems()
+//    println(sp.validPalindrome("abcaa"))
 //    sp.largeGroupPositions("abc").forEach {
 //        printArray(it.toIntArray())
 //    }
@@ -25,8 +27,8 @@ fun main() {
 //    println(sp.reverseWords(""))
 //    println(sp.validIPAddress("00.0.0.0"))
 
-//    val np = NumberProblems()
-//    printArray(np.productExceptSelf(intArrayOf(12, 11, 10, 11)))
+    val np = NumberProblems()
+    println(np.getHint("1123", "0111"))
 
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)
@@ -42,6 +44,8 @@ fun main() {
 //    obj.addRange(left, right)
 //    var param_2 = obj.queryRange(left, right)
 //    obj.removeRange(left, right)
+//    val simulatedProgram = SimulatedProgram()
+//    println(simulatedProgram.judgeCircle("UDRL"))
 }
 
 

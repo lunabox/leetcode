@@ -69,7 +69,7 @@ class LeetCodeKt {
     fun threeSum(nums: IntArray): List<List<Int>> {
         val result = ArrayList<List<Int>>()
         nums.sort()
-        for (i in 0 until nums.size) {
+        for (i in nums.indices) {
             if (i == 0 || nums[i] > nums[i - 1]) {
                 var l = i + 1
                 var r = nums.size - 1

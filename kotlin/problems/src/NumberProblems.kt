@@ -1,5 +1,6 @@
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 class NumberProblems {
 
@@ -275,5 +276,88 @@ class NumberProblems {
             }
         }
         return if (left - right + 1 > 0) left - right + 1 else 0
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/
+     */
+    fun subtractProductAndSum(n: Int): Int {
+        var num = n
+        var multi = 1
+        var sum = 0
+        while (num != 0) {
+            val last = num % 10
+            multi *= last
+            sum += last
+            num /= 10
+        }
+        return multi - sum
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/sum-of-square-numbers/
+     */
+    fun judgeSquareSum(c: Int): Boolean {
+        var i = 0
+        var j = sqrt(c.toDouble()).toInt()
+        while (i <= j) {
+            val r = i * i + j * j
+            when {
+                r == c -> return true
+                r < c -> i++
+                r > c -> j--
+            }
+        }
+        return false
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/non-decreasing-array/
+     */
+    fun checkPossibility(nums: IntArray): Boolean {
+        var change = false
+        for (i in 0 until nums.size - 1) {
+            if (nums[i] <= nums[i + 1]) {
+                continue
+            }
+            if (change || (i > 0 && nums[i - 1] > nums[i + 1])) {
+                return false
+            }
+            nums[i] = nums[i + 1]
+            change = true
+        }
+        return true
+    }
+
+    /**
+     * 你正在和你的朋友玩 猜数字（Bulls and Cows）游戏：你写下一个数字让你的朋友猜。每次他猜测后，你给他一个提示，告诉他有多少位数字和确切位置都猜对了（称为“Bulls”, 公牛），有多少位数字猜对了但是位置不对（称为“Cows”, 奶牛）。你的朋友将会根据提示继续猜，直到猜出秘密数字。
+     * 请写出一个根据秘密数字和朋友的猜测数返回提示的函数，用 A 表示公牛，用 B 表示奶牛。
+     * 请注意秘密数字和朋友的猜测数都可能含有重复数字。
+     */
+    fun getHint(secret: String, guess: String): String {
+        if (secret.isBlank() || guess.isBlank()) {
+            return "0A0B"
+        }
+        var a = 0
+        var b = 0
+        val nums = IntArray(10)
+        val flags = IntArray(secret.length)
+        secret.forEach {
+            nums[it.toInt() - '0'.toInt()]++
+        }
+        secret.forEachIndexed { index, c ->
+            if (c == guess[index]) {
+                a++
+                nums[c.toInt() - '0'.toInt()]--
+                flags[index]++
+            }
+        }
+        guess.forEachIndexed { index, c ->
+            if (flags[index] == 0 && nums[c.toInt() - '0'.toInt()] > 0) {
+                b++
+                nums[c.toInt() - '0'.toInt()]--
+            }
+        }
+        return "${a}A${b}B"
     }
 }

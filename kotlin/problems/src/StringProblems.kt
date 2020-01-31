@@ -131,4 +131,33 @@ class StringProblems {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/valid-palindrome-ii/comments/
+     */
+    fun validPalindrome(s: String): Boolean {
+        var i = 0
+        var j = s.length - 1
+        while (i < j) {
+            if (s[i] != s[j]) {
+                return isSubStringValid(s, i + 1, j) || isSubStringValid(s, i, j - 1)
+            }
+            i++
+            j--
+        }
+        return true
+    }
+
+    private fun isSubStringValid(s: String, i: Int, j: Int): Boolean {
+        var start = i
+        var end = j
+        while (start < end) {
+            if (s[start] != s[end]) {
+                return false
+            }
+            start++
+            end--
+        }
+        return true
+    }
 }
