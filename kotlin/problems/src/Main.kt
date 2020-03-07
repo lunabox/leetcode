@@ -18,7 +18,8 @@ fun main() {
 //    }
 //    println(t.isCousins(tree, 4, 5))
 
-//    val sp = StringProblems()
+    val sp = StringProblems()
+//    println(sp.toLowerCase("HHLKK1211ss ss"))
 //    println(sp.validPalindrome("abcaa"))
 //    sp.largeGroupPositions("abc").forEach {
 //        printArray(it.toIntArray())
@@ -28,7 +29,8 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    println(np.getHint("1123", "0111"))
+    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
+//    println(np.getHint("1123", "0111"))
 
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)
@@ -46,6 +48,9 @@ fun main() {
 //    obj.removeRange(left, right)
 //    val simulatedProgram = SimulatedProgram()
 //    println(simulatedProgram.judgeCircle("UDRL"))
+
+    val sim = SimulatedProgram()
+//    println(sim.coinChange(intArrayOf(2,6), 7))
 }
 
 

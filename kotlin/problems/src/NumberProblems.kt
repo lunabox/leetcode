@@ -360,4 +360,21 @@ class NumberProblems {
         }
         return "${a}A${b}B"
     }
+
+    /**
+     * https://leetcode-cn.com/problems/maximum-average-subarray-i/
+     */
+    fun findMaxAverage(nums: IntArray, k: Int): Double {
+        var s = nums.filterIndexed { index, _ ->
+            index < k
+        }.sum()
+        var m = s
+
+        for (i in k until nums.size) {
+            s += nums[i]
+            s -= nums[i - k]
+            m = if (s > m) s else m
+        }
+        return m.toDouble() / k.toDouble()
+    }
 }

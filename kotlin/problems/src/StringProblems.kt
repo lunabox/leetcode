@@ -160,4 +160,16 @@ class StringProblems {
         }
         return true
     }
+
+    fun toLowerCase(str: String): String {
+        val ch = CharArray(str.length)
+        str.forEachIndexed { index, c ->
+            if (c in 'A'..'Z') {
+                ch[index] = (c.toInt() - 'A'.toInt() + 'a'.toInt()).toChar()
+            } else {
+                ch[index] = c
+            }
+        }
+        return String(ch)
+    }
 }
