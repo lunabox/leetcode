@@ -385,4 +385,24 @@ class NumberProblems {
         val m = n.xor(n.shr(1))
         return m.and(m + 1) == 0
     }
+
+    /**
+     * https://leetcode-cn.com/problems/duplicate-zeros/
+     */
+    fun duplicateZeros(arr: IntArray): Unit {
+        var i = 0
+        while (i < arr.size) {
+            if (arr[i] != 0) {
+                i++
+                continue
+            }
+            for (j in arr.size - 1 downTo i + 1) {
+                arr[j] = arr[j - 1]
+            }
+            if (i + 1 < arr.size) {
+                arr[i + 1] = 0
+            }
+            i += 2
+        }
+    }
 }
