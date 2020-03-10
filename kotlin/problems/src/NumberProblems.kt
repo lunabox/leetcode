@@ -377,4 +377,22 @@ class NumberProblems {
         }
         return m.toDouble() / k.toDouble()
     }
+
+    fun findLengthOfLCIS(nums: IntArray): Int {
+        var cur = Int.MIN_VALUE
+        var curLength = 0
+        var maxLength = 0
+        nums.forEach {
+            if (it > cur) {
+                curLength++
+            } else {
+                curLength = 1
+            }
+            cur = it
+            if (curLength > maxLength) {
+                maxLength = curLength
+            }
+        }
+        return maxLength
+    }
 }

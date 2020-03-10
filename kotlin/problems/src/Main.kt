@@ -1,6 +1,3 @@
-import data.structure.RangeModule
-import java.util.*
-
 fun main() {
 //    val lc = LeetCodeKt()
 //    val s = "2-5g-3-J"
@@ -29,7 +26,8 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
+    println(np.findLengthOfLCIS(intArrayOf(2, 2, 2, 2, 2)))
+//    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
 //    println(np.getHint("1123", "0111"))
 
 //    var obj = SnapshotArray(5)
