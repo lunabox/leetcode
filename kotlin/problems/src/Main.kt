@@ -29,6 +29,10 @@ fun main() {
     println(np.findLengthOfLCIS(intArrayOf(2, 2, 2, 2, 2)))
 //    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
 //    println(np.getHint("1123", "0111"))
+//    repeat(100) {
+//        print("$it ${Integer.toBinaryString(it)} ")
+//        println(np.hasAlternatingBits(it))
+//    }
 
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)

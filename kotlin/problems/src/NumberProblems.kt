@@ -395,4 +395,12 @@ class NumberProblems {
         }
         return maxLength
     }
+
+    /**
+     * https://leetcode-cn.com/problems/binary-number-with-alternating-bits/
+     */
+    fun hasAlternatingBits(n: Int): Boolean {
+        val m = n.xor(n.shr(1))
+        return m.and(m + 1) == 0
+    }
 }
