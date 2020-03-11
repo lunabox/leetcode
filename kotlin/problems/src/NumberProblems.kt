@@ -405,4 +405,38 @@ class NumberProblems {
             i += 2
         }
     }
+
+    /**
+     * https://leetcode-cn.com/problems/next-permutation/
+     */
+    fun nextPermutation(nums: IntArray): Unit {
+        var n: Int = -1
+        for (i in nums.size - 1 downTo 1) {
+            if (nums[i - 1] < nums[i]) {
+                n = i - 1
+                break
+            }
+        }
+        if (n == -1) {
+            nums.sort()
+        } else {
+            var m: Int = nums.size - 1
+            for (j in n + 1 until nums.size) {
+                if (nums[j] <= nums[n]) {
+                    // find just larger than nums[n]
+                    m = j - 1
+                    break
+                }
+            }
+            // swap m and n
+            val temp = nums[n]
+            nums[n] = nums[m]
+            nums[m] = temp
+
+            // reverse
+            nums.slice(IntRange(n + 1, nums.size - 1)).reversed().forEachIndexed { index, i ->
+                nums[n + index + 1] = i
+            }
+        }
+    }
 }
