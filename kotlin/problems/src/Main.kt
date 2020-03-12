@@ -34,6 +34,11 @@ fun main() {
 //        println(np.hasAlternatingBits(it))
 //    }
 
+//    val arr = intArrayOf(1, 5, 1)
+    val arr = intArrayOf(1, 5, 8, 4, 7, 6, 5, 3, 1)
+    np.nextPermutation(arr)
+    println(arr.toList())
+
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)
 //    var snap1 = obj.snap()

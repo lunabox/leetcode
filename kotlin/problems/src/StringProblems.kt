@@ -172,4 +172,18 @@ class StringProblems {
         }
         return String(ch)
     }
+
+    /**
+     * https://leetcode-cn.com/problems/is-unique-lcci/
+     */
+    fun isUnique(astr: String): Boolean {
+        var cur: Char? = null
+        astr.toCharArray().sorted().forEach {
+            if (it == cur) {
+                return false
+            }
+            cur = it
+        }
+        return true
+    }
 }

@@ -403,4 +403,58 @@ class NumberProblems {
         val m = n.xor(n.shr(1))
         return m.and(m + 1) == 0
     }
+
+    /**
+     * https://leetcode-cn.com/problems/duplicate-zeros/
+     */
+    fun duplicateZeros(arr: IntArray): Unit {
+        var i = 0
+        while (i < arr.size) {
+            if (arr[i] != 0) {
+                i++
+                continue
+            }
+            for (j in arr.size - 1 downTo i + 1) {
+                arr[j] = arr[j - 1]
+            }
+            if (i + 1 < arr.size) {
+                arr[i + 1] = 0
+            }
+            i += 2
+        }
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/next-permutation/
+     */
+    fun nextPermutation(nums: IntArray): Unit {
+        var n: Int = -1
+        for (i in nums.size - 1 downTo 1) {
+            if (nums[i - 1] < nums[i]) {
+                n = i - 1
+                break
+            }
+        }
+        if (n == -1) {
+            nums.sort()
+        } else {
+            var m: Int = nums.size - 1
+            for (j in n + 1 until nums.size) {
+                if (nums[j] <= nums[n]) {
+                    // find just larger than nums[n]
+                    m = j - 1
+                    break
+                }
+            }
+            // swap m and n
+            val temp = nums[n]
+            nums[n] = nums[m]
+            nums[m] = temp
+
+            // reverse
+            nums.slice(IntRange(n + 1, nums.size - 1)).reversed().forEachIndexed { index, i ->
+                nums[n + index + 1] = i
+            }
+        }
+    }
 }
