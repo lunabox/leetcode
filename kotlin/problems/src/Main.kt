@@ -35,10 +35,15 @@ fun main() {
 //        print("$it ${Integer.toBinaryString(it)} ")
 //        println(np.hasAlternatingBits(it))
 //    }
-//    val arr = intArrayOf(1, 5, 1)
-    val arr = intArrayOf(1, 5, 8, 4, 7, 6, 5, 3, 1)
-    np.nextPermutation(arr)
-    println(arr.toList())
+
+    val arr = intArrayOf(1, 2, 3)
+//    val arr = intArrayOf(1, 5, 8, 4, 7, 6, 5, 3, 1)
+//    np.nextPermutation(arr)
+//    println(arr.toList())
+
+    np.permute(arr).forEach {
+        println(it)
+    }
 
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)

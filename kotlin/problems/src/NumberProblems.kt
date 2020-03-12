@@ -411,7 +411,7 @@ class NumberProblems {
      */
     fun nextPermutation(nums: IntArray): Unit {
         var n: Int = -1
-        for (i in nums.size - 1 downTo 1) {
+        for (i in nums.lastIndex downTo 1) {
             if (nums[i - 1] < nums[i]) {
                 n = i - 1
                 break
@@ -420,7 +420,7 @@ class NumberProblems {
         if (n == -1) {
             nums.sort()
         } else {
-            var m: Int = nums.size - 1
+            var m: Int = nums.lastIndex
             for (j in n + 1 until nums.size) {
                 if (nums[j] <= nums[n]) {
                     // find just larger than nums[n]
@@ -434,9 +434,38 @@ class NumberProblems {
             nums[m] = temp
 
             // reverse
-            nums.slice(IntRange(n + 1, nums.size - 1)).reversed().forEachIndexed { index, i ->
+            nums.slice(IntRange(n + 1, nums.lastIndex)).reversed().forEachIndexed { index, i ->
                 nums[n + index + 1] = i
             }
+        }
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/permutations/
+     */
+    fun permute(nums: IntArray): List<List<Int>> {
+        val result = ArrayList<List<Int>>()
+        permuteItem(result, nums, 0)
+        return result
+    }
+
+    private fun permuteItem(result: MutableList<List<Int>>, nums: IntArray, index: Int) {
+        if (index == nums.lastIndex) {
+            result.add(nums.toList())
+        } else {
+            for (i in index until nums.size) {
+                swap(nums, index, i)
+                permuteItem(result, nums, index + 1)
+                swap(nums, index, i)
+            }
+        }
+    }
+
+    private fun swap(nums: IntArray, i: Int, j: Int) {
+        if (i != j) {
+            val temp = nums[i]
+            nums[i] = nums[j]
+            nums[j] = temp
         }
     }
 }
