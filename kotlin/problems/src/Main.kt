@@ -1,14 +1,11 @@
-fun main() {
-//    val lc = LeetCodeKt()
-//    val s = "2-5g-3-J"
-//    println(leetCodeKt.licenseKeyFormatting(s, 2))
-//    (0..30).forEach {
-//        println("$it: ${lc.fib(it)}")
-//    }
-//    val r = lc.threeSumClosest(intArrayOf(1, 1, -1, -1, 3), -1)
-//    println(r)
+import case.NumberCase
+import solution.NumberProblems
+import solution.SimulatedProgram
+import solution.StringProblems
 
-//    val t = TreeProblems()
+fun main() {
+
+//    val t = solution.TreeProblems()
 //    val tree = t.createTree(arrayListOf(1, 2, 3, null, 4, null, 5))
 //    t.levelOrder(tree).forEach {
 //        printArray(it.toIntArray())
@@ -26,7 +23,10 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    println(np.findLengthOfLCIS(intArrayOf(2, 2, 2, 2, 2)))
+    NumberCase.loadIntArray().forEach {
+        print("${it.toList()} -> ")
+        println(np.checkPossibility(it))
+    }
 //    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
 //    println(np.getHint("1123", "0111"))
 //    repeat(100) {
@@ -35,9 +35,9 @@ fun main() {
 //    }
 
 //    val arr = intArrayOf(1, 5, 1)
-    val arr = intArrayOf(1, 5, 8, 4, 7, 6, 5, 3, 1)
-    np.nextPermutation(arr)
-    println(arr.toList())
+//    val arr = intArrayOf(1, 5, 8, 4, 7, 6, 5, 3, 1)
+//    np.nextPermutation(arr)
+//    println(arr.toList())
 
 //    var obj = SnapshotArray(5)
 //    obj.set(2, 15)
@@ -53,7 +53,7 @@ fun main() {
 //    obj.addRange(left, right)
 //    var param_2 = obj.queryRange(left, right)
 //    obj.removeRange(left, right)
-//    val simulatedProgram = SimulatedProgram()
+//    val simulatedProgram = solution.SimulatedProgram()
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()

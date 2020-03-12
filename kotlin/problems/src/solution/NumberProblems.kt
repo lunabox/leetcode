@@ -1,3 +1,5 @@
+package solution
+
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
@@ -315,16 +317,24 @@ class NumberProblems {
      * https://leetcode-cn.com/problems/non-decreasing-array/
      */
     fun checkPossibility(nums: IntArray): Boolean {
-        var change = false
-        for (i in 0 until nums.size - 1) {
+        var change = 0
+        if (nums.size > 1 && nums[0] > nums[1]) {
+            nums[0] = nums[1]
+            change++
+        }
+        for (i in 1 until nums.lastIndex) {
             if (nums[i] <= nums[i + 1]) {
                 continue
             }
-            if (change || (i > 0 && nums[i - 1] > nums[i + 1])) {
+            change++
+            if (change >= 2) {
                 return false
             }
-            nums[i] = nums[i + 1]
-            change = true
+            if (nums[i - 1] > nums[i + 1]) {
+                nums[i + 1] = nums[i]
+            } else {
+                nums[i] = nums[i - 1]
+            }
         }
         return true
     }
