@@ -1,3 +1,5 @@
+package solution
+
 import kotlin.math.abs
 
 class LeetCodeKt {
