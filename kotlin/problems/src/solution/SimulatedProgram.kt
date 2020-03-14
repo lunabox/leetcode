@@ -63,4 +63,21 @@ class SimulatedProgram {
 
         return result.filter { it.value == minStep }.keys.toTypedArray()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/binary-search/
+     */
+    fun search(nums: IntArray, target: Int): Int {
+        var left = 0
+        var right = nums.lastIndex
+        while (left <= right) {
+            val middle = (left + right) / 2
+            when {
+                target < nums[middle] -> right = middle - 1
+                target > nums[middle] -> left = middle + 1
+                else -> return middle
+            }
+        }
+        return -1
+    }
 }

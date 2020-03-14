@@ -2,6 +2,7 @@ package case
 
 import java.io.File
 import java.io.FileReader
+import kotlin.random.Random
 
 object NumberCase {
 
@@ -21,6 +22,24 @@ object NumberCase {
             list.add(array)
         }
         return list
+    }
+
+    /**
+     * 随机生成数字
+     */
+    fun randomIntArray(rangeMin: Int = 0, rangeMax: Int, lengthMax: Int, caseSum: Int): List<IntArray> {
+        val result = ArrayList<IntArray>(caseSum)
+        val random = Random(System.currentTimeMillis())
+        repeat(caseSum) {
+            val curArraySize = random.nextInt(1, lengthMax)
+            val array = IntArray(curArraySize)
+            repeat(curArraySize) {
+                array[it] = random.nextInt(rangeMin, rangeMax)
+            }
+            array.sort()
+            result.add(array)
+        }
+        return result
     }
 
     inline fun <T> Iterable<T>.forEachCase(action: (Int, T) -> Unit) {
