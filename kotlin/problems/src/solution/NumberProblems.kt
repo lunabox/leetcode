@@ -522,4 +522,25 @@ class NumberProblems {
         return ins
     }
 
+    /**
+     * https://leetcode-cn.com/problems/find-pivot-index/
+     */
+    fun pivotIndex(nums: IntArray): Int {
+        val sumArray = IntArray(nums.size)
+        nums.forEachIndexed { index, i ->
+            if (index > 0) {
+                sumArray[index] = sumArray[index - 1] + i
+            } else {
+                sumArray[index] = i
+            }
+        }
+        sumArray.forEachIndexed { index, i ->
+            val left = if (index == 0) 0 else sumArray[index - 1]
+            val right = if (index == sumArray.lastIndex) 0 else sumArray.last() - i
+            if (left == right) {
+                return index
+            }
+        }
+        return -1
+    }
 }

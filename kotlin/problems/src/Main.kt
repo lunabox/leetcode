@@ -67,9 +67,9 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
-//    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
-//    }
-    println(sim.search(intArrayOf(1, 5, 6, 9, 12), 2))
+    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
+        println(sim.search(ints, ints[0]))
+    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
 }
 
