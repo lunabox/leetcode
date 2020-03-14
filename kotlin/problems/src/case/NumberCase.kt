@@ -10,7 +10,8 @@ object NumberCase {
      */
     fun loadIntArray(): List<IntArray> {
         val list = mutableListOf<IntArray>()
-        val fileReader = FileReader(File("${File("").canonicalPath}${File.separator}src${File.separator}data${File.separator}nums.txt"))
+        val fileReader =
+            FileReader(File("${File("").canonicalPath}${File.separator}src${File.separator}data${File.separator}nums.txt"))
         fileReader.readLines().forEach {
             val str = it.split(",")
             val array = IntArray(str.size)
@@ -20,5 +21,20 @@ object NumberCase {
             list.add(array)
         }
         return list
+    }
+
+    inline fun <T> Iterable<T>.forEachCase(action: (Int, T) -> Unit) {
+        val printCase: (Int, Any?) -> Unit = { index, element ->
+            print("<$index> $element -> ")
+        }
+        for ((index, element) in this.withIndex()) {
+            when (element) {
+                is Iterable<*> -> printCase(index, element.toList())
+                is IntArray -> printCase(index, element.toList())
+                is LongArray -> printCase(index, element.toList())
+                else -> printCase(index, element.toString())
+            }
+            action(index, element)
+        }
     }
 }

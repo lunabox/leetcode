@@ -1,4 +1,5 @@
 import case.NumberCase
+import case.NumberCase.forEachCase
 import solution.NumberProblems
 import solution.SimulatedProgram
 import solution.StringProblems
@@ -23,10 +24,11 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    NumberCase.loadIntArray().forEach {
-        print("${it.toList()} -> ")
-        println(np.checkPossibility(it))
+
+    NumberCase.loadIntArray().forEachCase { _, case ->
+        println(np.checkPossibility(case))
     }
+
 //    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
 //    println(np.getHint("1123", "0111"))
 //    repeat(100) {
