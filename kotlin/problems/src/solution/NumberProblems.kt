@@ -496,4 +496,30 @@ class NumberProblems {
             nums[j] = temp
         }
     }
+
+    /**
+     * https://leetcode-cn.com/problems/degree-of-an-array/
+     */
+    fun findShortestSubArray(nums: IntArray): Int {
+        val left = HashMap<Int, Int>()
+        val right = HashMap<Int, Int>()
+        val countItem = HashMap<Int, Int>()
+        nums.forEachIndexed { index, i ->
+            if (i !in left.keys) {
+                left[i] = index
+            }
+            right[i] = index
+            countItem[i] = countItem.getOrDefault(i, 0) + 1
+        }
+
+        var ins = nums.size
+        val degree = countItem.values.max()
+        countItem.filterValues { it == degree }.forEach {
+            if (right[it.key]!! - left[it.key]!! + 1 < ins) {
+                ins = right[it.key]!! - left[it.key]!! + 1
+            }
+        }
+        return ins
+    }
+
 }

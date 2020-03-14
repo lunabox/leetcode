@@ -41,4 +41,26 @@ class SimulatedProgram {
         }
         return coinsMin[amount]
     }
+
+    /**
+     * https://leetcode-cn.com/problems/minimum-index-sum-of-two-lists/
+     */
+    fun findRestaurant(list1: Array<String>, list2: Array<String>): Array<String> {
+        var minStep = Int.MAX_VALUE
+        val hash = HashMap<String, Int>(list1.size)
+        val result = HashMap<String, Int>()
+        list1.forEachIndexed { index, s ->
+            hash[s] = index
+        }
+        list2.forEachIndexed { index, s ->
+            if (s in hash) {
+                if (index + hash[s]!! < minStep) {
+                    minStep = index + hash[s]!!
+                }
+                result[s] = hash[s]!! + index
+            }
+        }
+
+        return result.filter { it.value == minStep }.keys.toTypedArray()
+    }
 }

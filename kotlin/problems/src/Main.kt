@@ -1,5 +1,3 @@
-import case.NumberCase
-import case.NumberCase.forEachCase
 import solution.NumberProblems
 import solution.SimulatedProgram
 import solution.StringProblems
@@ -14,7 +12,7 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
-//    println(sp.toLowerCase("HHLKK1211ss ss"))
+    println(sp.countBinarySubstrings("1"))
 //    println(sp.validPalindrome("abcaa"))
 //    sp.largeGroupPositions("abc").forEach {
 //        printArray(it.toIntArray())
@@ -25,9 +23,9 @@ fun main() {
 
     val np = NumberProblems()
 
-    NumberCase.loadIntArray().forEachCase { _, case ->
-        println(np.checkPossibility(case))
-    }
+//    NumberCase.loadIntArray().forEachCase { _, case ->
+//        println(np.findShortestSubArray(case))
+//    }
 
 //    println(np.findMaxAverage(intArrayOf(1, 12, -5, -6, 50, 3), 4))
 //    println(np.getHint("1123", "0111"))

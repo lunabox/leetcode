@@ -188,4 +188,32 @@ class StringProblems {
         }
         return true
     }
+
+    /**
+     * https://leetcode-cn.com/problems/count-binary-substrings/
+     */
+    fun countBinarySubstrings(s: String): Int {
+        var countItem = 1
+        var cur = s[0]
+        val step = mutableListOf<Int>()
+        s.drop(1).forEach {
+            if (it == cur) {
+                countItem++
+            } else {
+                if (countItem > 0) {
+                    step.add(countItem)
+                }
+                countItem = 1
+                cur = it
+            }
+        }
+        if (countItem > 0) {
+            step.add(countItem)
+        }
+        var result = 0
+        for (i in 0 until step.lastIndex) {
+            result += if (step[i] <= step[i + 1]) step[i] else step[i + 1]
+        }
+        return result
+    }
 }
