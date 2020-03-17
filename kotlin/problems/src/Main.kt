@@ -1,5 +1,3 @@
-import case.NumberCase
-import case.NumberCase.forEachCase
 import solution.NumberProblems
 import solution.SimulatedProgram
 import solution.StringProblems
@@ -14,7 +12,10 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
-//    println(sp.countBinarySubstrings("1"))
+    sp.generateParenthesis(4).forEach {
+        println(it)
+    }
+//    println(sp.letterCasePermutation("s"))
 //    println(sp.validPalindrome("abcaa"))
 //    sp.largeGroupPositions("abc").forEach {
 //        printArray(it.toIntArray())
@@ -24,7 +25,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-
+//    println(np.subsets(intArrayOf(2, 4, 9)))
 //    NumberCase.loadIntArray().forEachCase { _, case ->
 //        println(np.findShortestSubArray(case))
 //    }
@@ -67,9 +68,9 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
-    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
-        println(sim.search(ints, ints[0]))
-    }
+//    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
+//        println(sim.search(ints, ints[0]))
+//    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
 }
 

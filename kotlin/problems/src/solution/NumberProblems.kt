@@ -536,4 +536,24 @@ class NumberProblems {
         }
         return -1
     }
+
+    /**
+     * https://leetcode-cn.com/problems/subsets/
+     */
+    fun subsets(nums: IntArray): List<List<Int>> {
+        val result = mutableListOf<List<Int>>()
+        dfsSubSets(nums, IntArray(nums.size), 0, result)
+        return result
+    }
+
+    private fun dfsSubSets(nums: IntArray, flag: IntArray, index: Int, result: MutableList<List<Int>>) {
+        if (index > nums.lastIndex) {
+            result.add(nums.filterIndexed { m, _ -> flag[m] == 1 }.toList())
+            return
+        }
+        flag[index] = 0
+        dfsSubSets(nums, flag, index + 1, result)
+        flag[index] = 1
+        dfsSubSets(nums, flag, index + 1, result)
+    }
 }

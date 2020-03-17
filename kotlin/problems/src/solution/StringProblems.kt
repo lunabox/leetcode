@@ -216,4 +216,57 @@ class StringProblems {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/letter-case-permutation/
+     */
+    fun letterCasePermutation(S: String): List<String> {
+        val letterCount = S.count { it.isLetter() }
+        val result = ArrayList<String>((1 shl letterCount) + 1)
+        letterDfs(S.toCharArray(), 0, result)
+        return result
+    }
+
+    private fun letterDfs(s: CharArray, index: Int, result: MutableList<String>) {
+        if (index > s.lastIndex) {
+            result.add(String(s))
+            return
+        }
+        val curLetter = s[index]
+        if (curLetter.isLetter()) {
+            letterDfs(s, index + 1, result)
+            s[index] = if (curLetter.isLowerCase()) curLetter.toUpperCase() else curLetter.toLowerCase()
+        }
+        letterDfs(s, index + 1, result)
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/generate-parentheses/
+     */
+    fun generateParenthesis(n: Int): List<String> {
+        val ans = mutableListOf<String>()
+        backTrace(ans, "", 0, 0, n)
+        return ans
+    }
+
+    /**
+     * 回溯法
+     * @param ans 结果
+     * @param cur 当前结构
+     * @param left 左括号
+     * @param right 右括号
+     * @param n 最大括号对数
+     */
+    private fun backTrace(ans: MutableList<String>, cur: String, left: Int, right: Int, n: Int) {
+        if (cur.length == 2 * n) {
+            ans.add(cur)
+            return
+        }
+        if (left < n) {
+            backTrace(ans, "$cur(", left + 1, right, n)
+        }
+        if (right < left) {
+            backTrace(ans, "$cur)", left, right + 1, n)
+        }
+    }
 }
