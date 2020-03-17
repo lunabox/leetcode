@@ -12,9 +12,9 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
-    sp.generateParenthesis(4).forEach {
-        println(it)
-    }
+//    sp.generateParenthesis(4).forEach {
+//        println(it)
+//    }
 //    println(sp.letterCasePermutation("s"))
 //    println(sp.validPalindrome("abcaa"))
 //    sp.largeGroupPositions("abc").forEach {
@@ -72,6 +72,18 @@ fun main() {
 //        println(sim.search(ints, ints[0]))
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
+    println(
+        sim.computeArea(
+            0
+            , 0
+            , 0
+            , 0
+            , -1
+            , -1
+            , 1
+            , 1
+        )
+    )
 }
 
 

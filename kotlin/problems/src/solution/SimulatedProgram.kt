@@ -1,5 +1,9 @@
 package solution
 
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
+
 class SimulatedProgram {
 
     /**
@@ -79,5 +83,41 @@ class SimulatedProgram {
             }
         }
         return -1
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/rectangle-overlap/
+     */
+    fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
+        val w1 = (rec1[2] - rec1[0]).toLong()
+        val h1 = (rec1[3] - rec1[1]).toLong()
+        val xm1 = (rec1[2] + rec1[0]).toLong()
+        val ym1 = (rec1[3] + rec1[1]).toLong()
+
+        val w2 = (rec2[2] - rec2[0]).toLong()
+        val h2 = (rec2[3] - rec2[1]).toLong()
+        val xm2 = (rec2[2] + rec2[0]).toLong()
+        val ym2 = (rec2[3] + rec2[1]).toLong()
+
+        return (abs(xm1 - xm2) < (w1 + w2)) && (abs(ym1 - ym2) < (h1 + h2))
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/rectangle-area/
+     * 在二维平面上计算出两个由直线构成的矩形重叠后形成的总面积。
+     */
+    fun computeArea(A: Int, B: Int, C: Int, D: Int, E: Int, F: Int, G: Int, H: Int): Int {
+        val lx = max(A, E).toLong()
+        val ly = max(B, F).toLong()
+        val rx = min(C, G).toLong()
+        val ry = min(D, H).toLong()
+        val area1 = (C - A).toLong() * (D - B)
+        val area2 = (G - E).toLong() * (H - F)
+
+        // 未相交
+        if (E > C || F > D || G < A || H < B) {
+            return (area1 + area2).toInt()
+        }
+        return (area1 + area2 - (rx - lx) * (ry - ly)).toInt()
     }
 }
