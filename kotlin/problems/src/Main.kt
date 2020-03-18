@@ -12,6 +12,9 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
+    sp.letterCombinations("22").forEach {
+        println(it)
+    }
 //    sp.generateParenthesis(4).forEach {
 //        println(it)
 //    }
@@ -72,18 +75,6 @@ fun main() {
 //        println(sim.search(ints, ints[0]))
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
-    println(
-        sim.computeArea(
-            0
-            , 0
-            , 0
-            , 0
-            , -1
-            , -1
-            , 1
-            , 1
-        )
-    )
 }
 
 
