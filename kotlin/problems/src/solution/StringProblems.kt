@@ -300,4 +300,22 @@ class StringProblems {
             dfsLetter(ans, map, "$cur$it", digits, index + 1)
         }
     }
+
+    /**
+     * https://leetcode-cn.com/problems/longest-palindrome/
+     */
+    fun longestPalindrome(s: String): Int {
+        val charCount = IntArray(128)
+        var ans = 0
+        s.forEach { charCount[it.toInt()]++ }
+        charCount.forEach {
+            ans += it / 2 * 2
+            if (it % 2 == 1 && ans % 2 == 0) {
+                ans++
+            }
+        }
+        return ans
+    }
+
+
 }
