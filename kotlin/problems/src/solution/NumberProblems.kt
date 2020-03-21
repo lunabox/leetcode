@@ -556,4 +556,20 @@ class NumberProblems {
         flag[index] = 1
         dfsSubSets(nums, flag, index + 1, result)
     }
+
+    /**
+     * https://leetcode-cn.com/problems/self-dividing-numbers/
+     */
+    fun selfDividingNumbers(left: Int, right: Int): List<Int> {
+        return (left..right).filter { checkSelfNumber(it) }
+    }
+
+    private fun checkSelfNumber(n: Int): Boolean {
+        n.toString().map { it.toInt() - '0'.toInt() }.forEach {
+            if (it == 0 || n % it != 0) {
+                return false
+            }
+        }
+        return true
+    }
 }
