@@ -120,4 +120,64 @@ class SimulatedProgram {
         }
         return (area1 + area2 - (rx - lx) * (ry - ly)).toInt()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/available-captures-for-rook/
+     * 车的可用捕获量
+     */
+    fun numRookCaptures(board: Array<CharArray>): Int {
+        var rx = 0
+        var ry = 0
+        var result = 0
+        board.forEachIndexed { indexArray, chars ->
+            chars.forEachIndexed { indexChar, c ->
+                if (c == 'R') {
+                    rx = indexChar
+                    ry = indexArray
+                }
+            }
+        }
+        right@ for (i in rx + 1 until board.size) {
+            when (board[ry][i]) {
+                'p' -> {
+                    result++
+                    break@right
+                }
+                '.' -> continue@right
+                'B', 'b', 'P' -> break@right
+            }
+        }
+        left@ for (i in rx - 1 downTo 0) {
+            when (board[ry][i]) {
+                'p' -> {
+                    result++
+                    break@left
+                }
+                '.' -> continue@left
+                'B', 'b', 'P' -> break@left
+            }
+        }
+        up@ for (j in ry - 1 downTo 0) {
+            when (board[j][rx]) {
+                'p' -> {
+                    result++
+                    break@up
+                }
+                '.' -> continue@up
+                'B', 'b', 'P' -> break@up
+            }
+        }
+
+        down@ for (j in ry + 1 until board.size) {
+            when (board[j][rx]) {
+                'p' -> {
+                    result++
+                    break@down
+                }
+                '.' -> continue@down
+                'B', 'b', 'P' -> break@down
+            }
+        }
+        return result
+    }
 }
