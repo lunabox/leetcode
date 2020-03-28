@@ -12,6 +12,7 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
+    println(sp.rotateString("abcde", "cdeab"))
 //    sp.letterCombinations("22").forEach {
 //        println(it)
 //    }
@@ -29,6 +30,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
+//    println(np.findErrorNums(intArrayOf(2, 2)).toList())
 //    np.selfDividingNumbers(1, 100).forEach {
 //        println(it)
 //    }
@@ -75,20 +77,20 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
-    println(
-        sim.numRookCaptures(
-            arrayOf(
-                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', 'R', '.', '.', '.', 'p'),
-                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.')
-            )
-        )
-    )
+//    println(
+//        sim.numRookCaptures(
+//            arrayOf(
+//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', 'R', '.', '.', '.', 'p'),
+//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
+//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.')
+//            )
+//        )
+//    )
 //    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
 //        println(sim.search(ints, ints[0]))
 //    }

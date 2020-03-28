@@ -317,5 +317,19 @@ class StringProblems {
         return ans
     }
 
-
+    /**
+     * https://leetcode-cn.com/problems/rotate-string/
+     */
+    fun rotateString(A: String, B: String): Boolean {
+        if (A == B) {
+            return true
+        }
+        for (index in 0..A.lastIndex) {
+            val rotate = A.slice(IntRange(index + 1, A.lastIndex)) + A.slice(IntRange(0, index))
+            if (B == rotate) {
+                return true
+            }
+        }
+        return false
+    }
 }

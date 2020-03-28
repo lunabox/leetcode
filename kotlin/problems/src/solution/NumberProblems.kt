@@ -1,5 +1,6 @@
 package solution
 
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
@@ -571,5 +572,29 @@ class NumberProblems {
             }
         }
         return true
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/set-mismatch/
+     */
+    fun findErrorNums(nums: IntArray): IntArray {
+        val result = IntArray(2)
+        if (nums.isEmpty()) {
+            return result
+        }
+        for (i in nums.indices) {
+            if (nums[abs(nums[i]) - 1] < 0) {
+                result[0] = abs(nums[i])
+            } else {
+                nums[abs(nums[i]) - 1] *= -1
+            }
+        }
+        nums.forEachIndexed missing@{ index, i ->
+            if (i > 0) {
+                result[1] = index + 1
+                return@missing
+            }
+        }
+        return result
     }
 }
