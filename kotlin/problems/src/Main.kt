@@ -12,9 +12,7 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
-    sp.groupAnagrams(arrayOf("eat", "tea", "tan", "ate", "nat", "bat")).forEach {
-        println(it)
-    }
+    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
 //    println(sp.rotateString("abcde", "cdeab"))
 //    sp.letterCombinations("22").forEach {
 //        println(it)

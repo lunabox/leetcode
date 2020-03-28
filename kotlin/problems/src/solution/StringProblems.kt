@@ -349,4 +349,16 @@ class StringProblems {
         result.addAll(map.values)
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target/
+     */
+    fun nextGreatestLetter(letters: CharArray, target: Char): Char {
+        letters.forEach {
+            if (it.toInt() > target.toInt()) {
+                return it
+            }
+        }
+        return letters[0]
+    }
 }
