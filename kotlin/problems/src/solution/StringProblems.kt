@@ -332,4 +332,21 @@ class StringProblems {
         }
         return false
     }
+
+    /**
+     * https://leetcode-cn.com/problems/group-anagrams/
+     */
+    fun groupAnagrams(strs: Array<String>): List<List<String>> {
+        val result = mutableListOf<List<String>>()
+        val map = HashMap<String, MutableList<String>>()
+        strs.forEach {
+            val sorted = String(it.toCharArray().sortedArray())
+            if (sorted !in map) {
+                map[sorted] = mutableListOf()
+            }
+            map[sorted]?.add(it)
+        }
+        result.addAll(map.values)
+        return result
+    }
 }
