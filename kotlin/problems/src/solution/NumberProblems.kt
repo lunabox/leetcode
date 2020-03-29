@@ -597,4 +597,28 @@ class NumberProblems {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/rotated-digits/
+     */
+    fun rotatedDigits(N: Int): Int {
+        var count = 0
+        repeat(N) N@{
+            val n = (it + 1).toString().toCharArray()
+            n.forEachIndexed check@{ index, c ->
+                when (c.toInt() - '0'.toInt()) {
+                    0, 1, 8 -> return@check
+                    2 -> n[index] = '5'
+                    5 -> n[index] = '2'
+                    6 -> n[index] = '9'
+                    9 -> n[index] = '6'
+                    else -> return@N
+                }
+            }
+            if (String(n).toInt() != it + 1) {
+                count++
+            }
+        }
+        return count
+    }
 }
