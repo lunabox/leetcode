@@ -180,4 +180,47 @@ class SimulatedProgram {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/unique-morse-code-words/
+     */
+    fun uniqueMorseRepresentations(words: Array<String>): Int {
+        val morse = arrayOf(
+            ".-",
+            "-...",
+            "-.-.",
+            "-..",
+            ".",
+            "..-.",
+            "--.",
+            "....",
+            "..",
+            ".---",
+            "-.-",
+            ".-..",
+            "--",
+            "-.",
+            "---",
+            ".--.",
+            "--.-",
+            ".-.",
+            "...",
+            "-",
+            "..-",
+            "...-",
+            ".--",
+            "-..-",
+            "-.--",
+            "--.."
+        )
+        val set = HashSet<String>()
+        words.forEach words@{ word ->
+            val code = StringBuffer()
+            word.forEach {
+                code.append(morse[it - 'a'])
+            }
+            set.add(code.toString())
+        }
+        return set.size
+    }
 }
