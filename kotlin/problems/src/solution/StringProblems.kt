@@ -361,4 +361,23 @@ class StringProblems {
         }
         return letters[0]
     }
+
+    /**
+     * https://leetcode-cn.com/problems/reverse-only-letters/
+     */
+    fun reverseOnlyLetters(S: String): String {
+        val chars = S.toCharArray()
+        val indexes = mutableListOf<Int>()
+        chars.forEachIndexed { index, c ->
+            if (c.isLetter()) {
+                indexes.add(index)
+            }
+        }
+        repeat(indexes.size / 2) {
+            val temp = chars[indexes[it]]
+            chars[indexes[it]] = chars[indexes[indexes.size - it - 1]]
+            chars[indexes[indexes.size - it - 1]] = temp
+        }
+        return String(chars)
+    }
 }
