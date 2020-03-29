@@ -380,4 +380,28 @@ class StringProblems {
         }
         return String(chars)
     }
+
+    /**
+     * https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/
+     */
+    fun countCharacters(words: Array<String>, chars: String): Int {
+        val letter = IntArray(26) { 0 }
+        var sum = 0
+        chars.forEach {
+            letter[it - 'a']++
+        }
+        words.forEach words@{ word ->
+            val map = HashMap<Char, Int>()
+            word.forEach {
+                map[it] = map[it]?.plus(1) ?: 1
+            }
+            map.keys.forEach {
+                if (map[it]!! > letter[it - 'a']) {
+                    return@words
+                }
+            }
+            sum += word.length
+        }
+        return sum
+    }
 }
