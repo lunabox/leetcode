@@ -223,4 +223,33 @@ class SimulatedProgram {
         }
         return set.size
     }
+
+    /**
+     * https://leetcode-cn.com/problems/subdomain-visit-count/
+     */
+    fun subdomainVisits(cpdomains: Array<String>): List<String> {
+        val countMap = HashMap<String, Int>()
+        cpdomains.forEach {
+            val countName = it.split(" ")
+            if (countName.size >= 2) {
+                val count = countName[0].toInt()
+                val domain = countName[1]
+                countMap[domain] = countMap[domain]?.plus(count) ?: count
+                var index = -1
+                while (true) {
+                    index = domain.indexOf(".", index + 1)
+                    if (index == -1) {
+                        break
+                    }
+                    val newDomain = domain.slice(IntRange(index + 1, domain.lastIndex))
+                    countMap[newDomain] = countMap[newDomain]?.plus(count) ?: count
+                }
+            }
+        }
+        val result = mutableListOf<String>()
+        countMap.keys.forEach {
+            result.add("${countMap[it]} $it")
+        }
+        return result
+    }
 }
