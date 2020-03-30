@@ -252,4 +252,34 @@ class SimulatedProgram {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/count-number-of-teams/
+     */
+    fun numTeams(rating: IntArray): Int {
+        var sum = 0
+        for (i in 1 until rating.lastIndex) {
+            var minLeftSum = 0
+            var maxLeftSum = 0
+            for (j in 0 until i) {
+                if (rating[j] > rating[i]) {
+                    maxLeftSum++
+                } else if (rating[j] < rating[i]) {
+                    minLeftSum++
+                }
+            }
+
+            var minRightSum = 0
+            var maxRightSum = 0
+            for (j in i + 1 until rating.size) {
+                if (rating[j] > rating[i]) {
+                    maxRightSum++
+                } else if (rating[j] < rating[i]) {
+                    minRightSum++
+                }
+            }
+            sum += (minLeftSum * maxRightSum) + (maxLeftSum * minRightSum)
+        }
+        return sum
+    }
 }
