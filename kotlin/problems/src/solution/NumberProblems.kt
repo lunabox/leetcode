@@ -642,4 +642,30 @@ class NumberProblems {
         }
         return if (count == current) current else -1
     }
+
+    /**
+     * https://leetcode-cn.com/problems/cells-with-odd-values-in-a-matrix/
+     */
+    fun oddCells(n: Int, m: Int, indices: Array<IntArray>): Int {
+        val data = Array(n) { IntArray(m) { 0 } }
+        indices.forEach { loc ->
+            val x = loc[0]
+            val y = loc[1]
+            repeat(m) {
+                data[loc[0]][it]++
+            }
+            repeat(n) {
+                data[it][loc[1]]++
+            }
+        }
+        var count = 0
+        for (i in 0 until n) {
+            for (j in 0 until m) {
+                if (data[i][j] % 2 == 1) {
+                    count++
+                }
+            }
+        }
+        return count
+    }
 }

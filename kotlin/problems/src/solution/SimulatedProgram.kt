@@ -282,4 +282,26 @@ class SimulatedProgram {
         }
         return sum
     }
+
+    /**
+     * https://leetcode-cn.com/problems/number-of-days-between-two-dates/
+     */
+    fun daysBetweenDates(date1: String, date2: String): Int {
+        val parserDate: (Int, Int, Int) -> Int = { year, month, day ->
+            val monthDays = intArrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+            var days = 0
+            for (i in 1 until month) {
+                days += monthDays[i - 1]
+            }
+            if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && month > 2) {
+                days++
+            }
+            days += day
+            days += 365 * (year - 1970) + (year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400
+            days
+        }
+        val days1 = parserDate(date1.take(4).toInt(), date1.slice(IntRange(5, 6)).toInt(), date1.takeLast(2).toInt())
+        val days2 = parserDate(date2.take(4).toInt(), date2.slice(IntRange(5, 6)).toInt(), date2.takeLast(2).toInt())
+        return abs(days2 - days1)
+    }
 }
