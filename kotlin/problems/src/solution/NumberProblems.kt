@@ -621,4 +621,25 @@ class NumberProblems {
         }
         return count
     }
+
+    /**
+     * https://leetcode-cn.com/problems/find-lucky-integer-in-an-array/
+     */
+    fun findLucky(arr: IntArray): Int {
+        val n = arr.sorted().reversed()
+        var current = n[0]
+        var count = 1
+        for (i in 1..n.lastIndex) {
+            if (n[i] == current) {
+                count++
+            } else {
+                if (count == current) {
+                    return current
+                }
+                current = n[i]
+                count = 1
+            }
+        }
+        return if (count == current) current else -1
+    }
 }
