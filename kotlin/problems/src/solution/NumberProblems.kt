@@ -1,5 +1,6 @@
 package solution
 
+import java.math.BigInteger
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -667,5 +668,46 @@ class NumberProblems {
             }
         }
         return count
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/string-to-integer-atoi/
+     */
+    fun myAtoi(str: String): Int {
+        var s = str.trim()
+        if (s.isEmpty()) {
+            return 0
+        }
+        if (s[0] != '+' && s[0] != '-' && !s[0].isDigit()) {
+            return 0
+        }
+        val nav = if (s[0] == '+' || s[0].isDigit()) 1L else -1L
+        s = if (s[0] == '-' || s[0] == '+') s.substring(1) else s
+        if (s.isEmpty() || !s[0].isDigit()) {
+            return 0
+        }
+        var index = s.lastIndex
+        for (i in s.indices) {
+            if (!s[i].isDigit()) {
+                break
+            }
+            index = i
+        }
+        return try {
+            val r = s.substring(0, index + 1).toBigInteger().multiply(BigInteger.valueOf(nav))
+            when {
+                r > BigInteger.valueOf(Int.MAX_VALUE.toLong()) -> {
+                    Int.MAX_VALUE
+                }
+                r < BigInteger.valueOf(Int.MIN_VALUE.toLong()) -> {
+                    Int.MIN_VALUE
+                }
+                else -> {
+                    r.toInt()
+                }
+            }
+        } catch (e: Exception) {
+            0
+        }
     }
 }
