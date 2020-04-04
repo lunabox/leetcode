@@ -12,7 +12,7 @@ fun main() {
 //    println(t.isCousins(tree, 4, 5))
 
     val sp = StringProblems()
-    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
+//    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
 //    println(sp.rotateString("abcde", "cdeab"))
 //    sp.letterCombinations("22").forEach {
@@ -32,6 +32,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
+    println(np.myAtoi("20000000000000000000"))
 //    println(np.findErrorNums(intArrayOf(2, 2)).toList())
 //    np.selfDividingNumbers(1, 100).forEach {
 //        println(it)
