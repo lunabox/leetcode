@@ -708,4 +708,28 @@ class NumberProblems {
             0
         }
     }
+
+    /**
+     * 双周赛
+     */
+    fun countLargestGroup(n: Int): Int {
+        val count = IntArray(36) { 0 }
+        for (i in 1..n) {
+            var sum = 0
+            i.toString().forEach {
+                sum += it - '0'
+            }
+            if (sum > 0) {
+                count[sum - 1]++
+            }
+        }
+        val m = count.max()
+        var result = 0
+        count.forEach {
+            if (it == m) {
+                result++
+            }
+        }
+        return result
+    }
 }

@@ -1,3 +1,4 @@
+import solution.GraphProblems
 import solution.NumberProblems
 import solution.SimulatedProgram
 import solution.StringProblems
@@ -10,6 +11,8 @@ fun main() {
 //        printArray(it.toIntArray())
 //    }
 //    println(t.isCousins(tree, 4, 5))
+    val g = GraphProblems()
+    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
@@ -32,7 +35,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    println(np.myAtoi("20000000000000000000"))
+//    println(np.myAtoi("20000000000000000000"))
 //    println(np.findErrorNums(intArrayOf(2, 2)).toList())
 //    np.selfDividingNumbers(1, 100).forEach {
 //        println(it)

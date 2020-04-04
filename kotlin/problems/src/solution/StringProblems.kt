@@ -404,4 +404,29 @@ class StringProblems {
         }
         return sum
     }
+
+    /**
+     * 周赛
+     */
+    fun canConstruct(s: String, k: Int): Boolean {
+        val letters = IntArray(26) { 0 }
+        s.forEach {
+            letters[it - 'a']++
+        }
+        var jishu = 0
+        var oushu = 0
+        letters.filter { it > 0 }.forEach {
+            oushu += it / 2
+            if (it % 2 == 1) {
+                jishu++
+            }
+        }
+        if (jishu > k) {
+            return false
+        }
+        if (jishu + oushu > k || (jishu + oushu <= k && k <= jishu + 2 * oushu)) {
+            return true
+        }
+        return false
+    }
 }
