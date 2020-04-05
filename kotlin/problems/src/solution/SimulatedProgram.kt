@@ -304,4 +304,18 @@ class SimulatedProgram {
         val days2 = parserDate(date2.take(4).toInt(), date2.slice(IntRange(5, 6)).toInt(), date2.takeLast(2).toInt())
         return abs(days2 - days1)
     }
+
+    /**
+     * https://leetcode-cn.com/problems/container-with-most-water/
+     */
+    fun maxArea(height: IntArray): Int {
+        var area = 0
+        for (i in 0 until height.lastIndex) {
+            for (j in i + 1 until height.size) {
+                val s = (j - i) * min(height[j], height[i])
+                area = max(area, s)
+            }
+        }
+        return area
+    }
 }

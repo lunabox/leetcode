@@ -1,10 +1,30 @@
 import data.structure.LFUCache
-import solution.GraphProblems
-import solution.NumberProblems
-import solution.SimulatedProgram
-import solution.StringProblems
+import data.structure.ListNode
+import solution.*
 
 fun main() {
+    val linkNode = LinkProblems()
+    val nodes = Array<ListNode?>(3) { null }
+    var cur: ListNode? = null
+
+    nodes[0] = ListNode(1)
+    cur = nodes[0]
+    cur!!.next = ListNode(4)
+    cur = cur.next
+    cur!!.next = ListNode(5)
+
+    nodes[1] = ListNode(1)
+    cur = nodes[1]
+    cur!!.next = ListNode(3)
+    cur = cur.next
+    cur!!.next = ListNode(4)
+
+    nodes[2] = ListNode(2)
+    cur = nodes[2]
+    cur!!.next = ListNode(6)
+
+    linkNode.mergeKLists(arrayOf(null))?.printList()
+
 //    val t = solution.TreeProblems()
 //    val tree = t.createTree(arrayListOf(1, 2, 3, null, 4, null, 5))
 //    t.levelOrder(tree).forEach {
@@ -15,7 +35,7 @@ fun main() {
 //    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
-    println(sp.longestDiverseString(4, 42, 11))
+//    println(sp.longestDiverseString(4, 42, 11))
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
 //    println(sp.rotateString("abcde", "cdeab"))

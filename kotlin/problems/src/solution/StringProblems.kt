@@ -1,5 +1,6 @@
 package solution
 
+import kotlin.math.max
 import kotlin.math.min
 
 
@@ -467,4 +468,39 @@ class StringProblems {
         return result.toString()
     }
 
+
+    /**
+     * https://leetcode-cn.com/problems/zigzag-conversion/
+     */
+    fun convert(s: String, numRows: Int): String {
+        if (numRows == 0) {
+            return s
+        }
+        val chars = Array<MutableList<Char>>(numRows) { mutableListOf() }
+        var mode = 0
+        var index = 0
+        s.forEach { c ->
+            chars[index].add(c)
+            if (mode == 0) {
+                index++
+                if (index == numRows) {
+                    mode = 1
+                    index = max(index - 2, 0)
+                }
+            } else {
+                index--
+                if (index == -1) {
+                    mode = 0
+                    index = min(index + 2, numRows - 1)
+                }
+            }
+        }
+        val result = StringBuffer(s.length)
+        chars.forEach {
+            it.forEach { c ->
+                result.append(c)
+            }
+        }
+        return result.toString()
+    }
 }
