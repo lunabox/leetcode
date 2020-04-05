@@ -1,5 +1,8 @@
 package solution
 
+import kotlin.math.min
+
+
 class StringProblems {
 
     /**
@@ -430,48 +433,38 @@ class StringProblems {
         return false
     }
 
-    private var maxLength = -1
-    private var result: String = ""
-
     /**
-     * 周赛
+     * https://leetcode-cn.com/problems/longest-happy-string/
      */
     fun longestDiverseString(a: Int, b: Int, c: Int): String {
-        maxHappyString("", a, b, c)
-        return result
+        val result = StringBuffer(a + b + c)
+        val chars = arrayOf('a', 'b', 'c')
+        val n = arrayOf(a, b, c)
+        var lastIndex = -1
+
+        while (true) {
+            val temp = mutableListOf<Pair<Int, Int>>()
+            for (index in n.indices) {
+                if (index != lastIndex) {
+                    temp.add(Pair(n[index], index))
+                }
+            }
+            temp.sortBy { it.first }
+            val last = temp.last()
+            if (last.first == 0) {
+                break
+            }
+            var take = min(last.first, 2)
+            if (lastIndex != -1 && n[lastIndex] > last.first) {
+                take = 1
+            }
+            repeat(take) {
+                result.append(chars[last.second])
+            }
+            n[last.second] -= take
+            lastIndex = last.second
+        }
+        return result.toString()
     }
 
-    private fun maxHappyString(buffer: String, a: Int, b: Int, c: Int) {
-        if ((buffer.isEmpty() || buffer.last() != 'a') && a > 0) {
-            if (a > 1) {
-                maxHappyString("${buffer}aa", a - 2, b, c)
-            }
-            if ((a == 1 && b == 0 && c == 0) || a <= c + b) {
-                maxHappyString("${buffer}a", a - 1, b, c)
-            }
-        }
-
-        if ((buffer.isEmpty() || buffer.last() != 'b') && b > 0) {
-            if (b > 1) {
-                maxHappyString("${buffer}bb", a, b - 2, c)
-            }
-            if ((a == 0 && b == 1 && c == 0) || b <= a + c) {
-                maxHappyString("${buffer}b", a, b - 1, c)
-            }
-        }
-
-        if ((buffer.isEmpty() || buffer.last() != 'c') && c > 0) {
-            if (c > 1) {
-                maxHappyString("${buffer}cc", a, b, c - 2)
-            }
-            if ((a == 0 && b == 0 && c == 1) || c <= a + b) {
-                maxHappyString("${buffer}c", a, b, c - 1)
-            }
-        }
-
-        if (buffer.length > maxLength) {
-            maxLength = buffer.length
-            result = buffer
-        }
-    }
 }
