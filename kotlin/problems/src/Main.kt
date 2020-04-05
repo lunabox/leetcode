@@ -12,9 +12,10 @@ fun main() {
 //    }
 //    println(t.isCousins(tree, 4, 5))
     val g = GraphProblems()
-    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
+//    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
+    println(sp.longestDiverseString(4, 42, 11))
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
 //    println(sp.rotateString("abcde", "cdeab"))
@@ -35,6 +36,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
+//    println(np.numSteps("1"))
 //    println(np.myAtoi("20000000000000000000"))
 //    println(np.findErrorNums(intArrayOf(2, 2)).toList())
 //    np.selfDividingNumbers(1, 100).forEach {

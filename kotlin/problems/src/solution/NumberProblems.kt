@@ -732,4 +732,40 @@ class NumberProblems {
         }
         return result
     }
+
+    /**
+     * https://leetcode-cn.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/
+     */
+    fun numSteps(s: String): Int {
+        var binNum = BigInteger(s, 2)
+        var count = 0
+        val one = BigInteger.valueOf(1L)
+        while (binNum > one) {
+            if (binNum.and(one) == one) {
+                binNum++
+            } else {
+                binNum = binNum.shr(1)
+            }
+            count++
+        }
+        return count
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/minimum-subsequence-in-non-increasing-order/
+     */
+    fun minSubsequence(nums: IntArray): List<Int> {
+        val numSum = nums.sum()
+        var subSum = 0
+        val result = mutableListOf<Int>()
+        nums.sorted().reversed().forEach {
+            subSum += it
+            result.add(it)
+            if (subSum > numSum - subSum) {
+                return result.sorted().reversed()
+            }
+        }
+        return result
+    }
+
 }
