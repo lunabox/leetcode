@@ -1,9 +1,22 @@
+import data.structure.LFUCache
 import solution.GraphProblems
 import solution.NumberProblems
 import solution.SimulatedProgram
 import solution.StringProblems
 
 fun main() {
+    val cache = LFUCache( 2 /* capacity (缓存容量) */ );
+
+    cache.put(1, 1)
+    cache.put(2, 2)
+    println(cache.get(1))       // 返回 1
+    cache.put(3, 3);    // 去除 key 2
+    println(cache.get(2))       // 返回 -1 (未找到key 2)
+    println(cache.get(3))       // 返回 3
+    cache.put(4, 4);    // 去除 key 1
+    println(cache.get(1))       // 返回 -1 (未找到 key 1)
+    println(cache.get(3))       // 返回 3
+    println(cache.get(4))       // 返回 4
 
 //    val t = solution.TreeProblems()
 //    val tree = t.createTree(arrayListOf(1, 2, 3, null, 4, null, 5))
@@ -15,7 +28,7 @@ fun main() {
 //    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
-    println(sp.longestDiverseString(4, 42, 11))
+//    println(sp.longestDiverseString(4, 42, 11))
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
 //    println(sp.rotateString("abcde", "cdeab"))
