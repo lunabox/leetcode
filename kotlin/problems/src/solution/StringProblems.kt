@@ -503,4 +503,23 @@ class StringProblems {
         }
         return result.toString()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+     */
+    fun lengthOfLongestSubstring(s: String): Int {
+        val letters = HashSet<Char>()
+        var ans = 0
+        var i = 0
+        var j = 0
+        while (i < s.length && j < s.length) {
+            if (s[j] !in letters) {
+                letters.add(s[j++])
+                ans = kotlin.math.max(ans, j - i)
+            } else {
+                letters.remove(s[i++])
+            }
+        }
+        return ans
+    }
 }
