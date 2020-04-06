@@ -768,4 +768,45 @@ class NumberProblems {
         return result
     }
 
+    fun multiply(num1: String, num2: String): String {
+        val result = StringBuffer()
+        val n1 = num1.reversed()
+        val n2 = num2.reversed()
+
+        val addNum: (StringBuffer, StringBuffer) -> Unit = { result, s ->
+            var addCarry = 0
+            s.map { it - '0' }.forEachIndexed { index, c ->
+                if (index < result.length) {
+                    val m = (result[index] - '0' + c + addCarry)
+                    addCarry = m / 10
+                    result.setCharAt(index, ((m % 10) + '0'.toInt()).toChar())
+                } else {
+                    val m = c + addCarry
+                    addCarry = m / 10
+                    result.append(m % 10)
+                }
+            }
+            if (addCarry > 0) {
+                result.append(addCarry)
+            }
+        }
+        n1.map { it - '0' }.forEachIndexed { i, n ->
+            val lineBuffer = StringBuffer()
+            var carry = 0
+            repeat(i) { lineBuffer.append(0) }
+            n2.map { it - '0' }.forEach { m ->
+                val s = n * m + carry
+                carry = s / 10
+                lineBuffer.append(s % 10)
+            }
+            if (carry > 0) {
+                lineBuffer.append(carry)
+            }
+            addNum(result, lineBuffer)
+        }
+        if (result.count { it == '0' } == result.length) {
+            return "0"
+        }
+        return result.reverse().toString()
+    }
 }

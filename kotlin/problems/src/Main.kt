@@ -4,26 +4,6 @@ import solution.*
 
 fun main() {
     val linkNode = LinkProblems()
-    val nodes = Array<ListNode?>(3) { null }
-    var cur: ListNode? = null
-
-    nodes[0] = ListNode(1)
-    cur = nodes[0]
-    cur!!.next = ListNode(4)
-    cur = cur.next
-    cur!!.next = ListNode(5)
-
-    nodes[1] = ListNode(1)
-    cur = nodes[1]
-    cur!!.next = ListNode(3)
-    cur = cur.next
-    cur!!.next = ListNode(4)
-
-    nodes[2] = ListNode(2)
-    cur = nodes[2]
-    cur!!.next = ListNode(6)
-
-    linkNode.mergeKLists(arrayOf(null))?.printList()
 
 //    val t = solution.TreeProblems()
 //    val tree = t.createTree(arrayListOf(1, 2, 3, null, 4, null, 5))
@@ -56,6 +36,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
+    println(np.multiply("123", "456"))
 //    println(np.numSteps("1"))
 //    println(np.myAtoi("20000000000000000000"))
 //    println(np.findErrorNums(intArrayOf(2, 2)).toList())
