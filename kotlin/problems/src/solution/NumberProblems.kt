@@ -809,4 +809,19 @@ class NumberProblems {
         }
         return result.reverse().toString()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/search-a-2d-matrix/
+     */
+    fun searchMatrix(matrix: Array<IntArray>, target: Int): Boolean {
+        matrix.forEach {
+            if (it.isNotEmpty() && target <= it.last()) {
+                val index = it.indexOf(target)
+                if (index >= 0) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }
