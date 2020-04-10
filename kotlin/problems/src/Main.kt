@@ -15,6 +15,9 @@ fun main() {
 //    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
+    sp.restoreIpAddresses("0279245587303").forEach {
+        println(it)
+    }
 //    println(sp.longestDiverseString(4, 42, 11))
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
@@ -36,7 +39,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    println(np.multiply("123", "456"))
+//    println(np.multiply("123", "456"))
 //    println(np.numSteps("1"))
 //    println(np.myAtoi("20000000000000000000"))
 //    println(np.findErrorNums(intArrayOf(2, 2)).toList())

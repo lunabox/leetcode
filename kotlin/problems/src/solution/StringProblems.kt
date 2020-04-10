@@ -522,4 +522,41 @@ class StringProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/restore-ip-addresses/
+     */
+    fun restoreIpAddresses(s: String): List<String> {
+        val result = mutableListOf<String>()
+        dfsIp(s, "", 0, 1, result)
+        return result
+    }
+
+    private fun dfsIp(s: String, current: String, index: Int, level: Int, result: MutableList<String>) {
+        if (index > s.lastIndex) {
+            return
+        }
+        if (level == 4) {
+            val last = s.slice(IntRange(index, s.lastIndex))
+            try {
+                if ((last.length == 1 || last[0] != '0') && last.toInt() in 0..255) {
+                    result.add("$current$last")
+                    return
+                }
+            } catch (e: NumberFormatException) {
+                return
+            }
+        }
+
+        for (i in index..min(index + 2, s.lastIndex)) {
+            val item = s.slice(IntRange(index, i))
+            try {
+                if ((item.length == 1 || item[0] != '0') && item.toInt() in 0..255) {
+                    dfsIp(s, "$current$item.", i + 1, level + 1, result)
+                }
+            } catch (e: java.lang.NumberFormatException) {
+
+            }
+        }
+    }
 }
