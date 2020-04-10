@@ -554,7 +554,7 @@ class StringProblems {
                 if ((item.length == 1 || item[0] != '0') && item.toInt() in 0..255) {
                     dfsIp(s, "$current$item.", i + 1, level + 1, result)
                 }
-            } catch (e: java.lang.NumberFormatException) {
+            } catch (e: NumberFormatException) {
 
             }
         }

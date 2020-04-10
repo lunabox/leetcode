@@ -839,4 +839,17 @@ class NumberProblems {
         return false
     }
 
+    /**
+     * https://leetcode-cn.com/problems/single-number-ii/
+     */
+    fun singleNumber(nums: IntArray): Int {
+        val set = HashSet<Long>()
+        var sum = 0L
+        nums.forEach {
+            set.add(it.toLong())
+            sum += it
+        }
+        return ((3 * set.sum() - sum) / 2).toInt()
+    }
+
 }
