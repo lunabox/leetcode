@@ -852,4 +852,18 @@ class NumberProblems {
         return ((3 * set.sum() - sum) / 2).toInt()
     }
 
+    /**
+     * https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+     */
+    fun majorityElement(nums: IntArray): Int {
+        var vote = 0
+        var target = 0
+        nums.forEach {
+            if (vote == 0) {
+                target = it
+            }
+            vote += if (it == target) 1 else -1
+        }
+        return if (nums.count { it == target } > nums.size / 2) target else 0
+    }
 }
