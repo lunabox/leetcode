@@ -34,4 +34,16 @@ class BitProblems {
             }
         }).toIntArray()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/insert-into-bits-lcci/
+     */
+    fun insertBits(N: Int, M: Int, i: Int, j: Int): Int {
+        var mask = 1
+        repeat(j - i) {
+            mask = mask.shl(1).or(0x1)
+        }
+        mask = mask.shl(i).inv()
+        return N.and(mask).or(M.shl(i))
+    }
 }
