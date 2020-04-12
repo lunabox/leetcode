@@ -559,4 +559,20 @@ class StringProblems {
             }
         }
     }
+
+
+    fun stringMatching(words: Array<String>): List<String> {
+        val ans = HashSet<String>()
+        for (i in words.indices) {
+            for (j in i + 1 until words.size) {
+                if (words[i].length >= words[j].length && words[i].indexOf(words[j]) >= 0) {
+                    ans.add(words[j])
+                } else if (words[i].length < words[j].length && words[j].indexOf(words[i]) >= 0) {
+                    ans.add(words[i])
+                }
+            }
+        }
+        return ans.toList()
+    }
+
 }

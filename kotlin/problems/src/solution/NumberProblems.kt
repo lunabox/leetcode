@@ -866,4 +866,21 @@ class NumberProblems {
         }
         return if (nums.count { it == target } > nums.size / 2) target else 0
     }
+
+    fun processQueries(queries: IntArray, m: Int): IntArray {
+        val ans = IntArray(queries.size)
+        val p = ArrayList<Int>(m)
+        repeat(m) {
+            p.add(it + 1)
+        }
+        queries.forEachIndexed { index, i ->
+            val pos = p.indexOf(i)
+            if (pos >= 0) {
+                ans[index] = pos
+                p.removeAt(pos)
+                p.add(0, i)
+            }
+        }
+        return ans
+    }
 }
