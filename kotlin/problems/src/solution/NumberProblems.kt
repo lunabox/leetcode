@@ -883,4 +883,18 @@ class NumberProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/number-of-ways-to-paint-n-x-3-grid/
+     */
+    fun numOfWays(n: Int): Int {
+        var a = 6L
+        var b = 6L
+        repeat(n - 1) {
+            val tempA = 3 * a + 2 * b
+            b = (2 * a + 2 * b) % 1000000007L
+            a = tempA % 1000000007L
+        }
+        return ((a + b) % 1000000007L).toInt()
+    }
 }

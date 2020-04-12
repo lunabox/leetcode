@@ -575,4 +575,14 @@ class StringProblems {
         return ans.toList()
     }
 
+    fun entityParser(text: String): String {
+        var ans = text.replace("&quot;", "\"")
+        ans = ans.replace("&apos;", "'")
+        ans = ans.replace("&amp;", "&")
+        ans = ans.replace("&gt;", ">")
+        ans = ans.replace("&lt;", "<")
+        ans = ans.replace("&frasl;", "/")
+        return ans
+    }
+
 }
