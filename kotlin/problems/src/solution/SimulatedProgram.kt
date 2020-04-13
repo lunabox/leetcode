@@ -318,4 +318,19 @@ class SimulatedProgram {
         }
         return area
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-125/problems/find-the-town-judge/
+     */
+    fun findJudge(N: Int, trust: Array<IntArray>): Int {
+        val vote = IntArray(N) { 0 }
+        trust.forEach {
+            if (it.size >= 2) {
+                vote[it[0] - 1]--
+                vote[it[1] - 1]++
+            }
+        }
+        val index = vote.indexOfFirst { it == N - 1 }
+        return if (index >= 0) index + 1 else -1
+    }
 }

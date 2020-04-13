@@ -15,9 +15,9 @@ fun main() {
 //    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
-    sp.restoreIpAddresses("0279245587303").forEach {
-        println(it)
-    }
+//    sp.restoreIpAddresses("0279245587303").forEach {
+//        println(it)
+//    }
 //    println(sp.longestDiverseString(4, 42, 11))
 //    println(sp.countCharacters(arrayOf("cat", "bt", "hat", "tree"), "atach"))
 //    println(sp.nextGreatestLetter(charArrayOf('a', 'b'), 'z'))
@@ -89,6 +89,14 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
+    val arr = Array<IntArray>(5) { IntArray(2) }
+    arr[0] = intArrayOf(1, 3)
+    arr[1] = intArrayOf(1, 4)
+    arr[2] = intArrayOf(2, 3)
+    arr[3] = intArrayOf(2, 4)
+    arr[4] = intArrayOf(4, 3)
+
+    println(sim.findJudge(4, arr))
 //    println(
 //        sim.numRookCaptures(
 //            arrayOf(
