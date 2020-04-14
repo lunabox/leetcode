@@ -187,4 +187,29 @@ class LinkProblems {
         }
         return ans.next
     }
+
+    /**
+     * https://leetcode-cn.com/problems/partition-list/
+     */
+    fun partition(head: ListNode?, x: Int): ListNode? {
+        val littleList = ListNode(0)
+        val bigList = ListNode(0)
+        var current = head
+        var littleCurrent = littleList
+        var bigCurrent = bigList
+        while (current != null) {
+            val temp = current
+            current = current.next
+            temp.next = null
+            if (temp.`val` < x) {
+                littleCurrent.next = temp
+                littleCurrent = littleCurrent.next!!
+            } else {
+                bigCurrent.next = temp
+                bigCurrent = bigCurrent.next!!
+            }
+        }
+        littleCurrent.next = bigList.next
+        return littleList.next
+    }
 }
