@@ -897,4 +897,11 @@ class NumberProblems {
         }
         return ((a + b) % 1000000007L).toInt()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/missing-number-lcci/
+     */
+    fun missingNumber(nums: IntArray): Int {
+        return nums.size * (nums.size + 1) / 2 - nums.sum()
+    }
 }
