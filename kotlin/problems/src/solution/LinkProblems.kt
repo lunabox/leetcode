@@ -120,4 +120,25 @@ class LinkProblems {
         }
         return ans.next
     }
+
+    /**
+     * https://leetcode-cn.com/problems/convert-binary-number-in-a-linked-list-to-integer/
+     */
+    fun getDecimalValue(head: ListNode?): Int {
+        var len = 0
+        var cur = head
+        var ans = 0
+        while (cur != null) {
+            len++
+            cur = cur.next
+        }
+        cur = head
+        var carry = (1).shl(len - 1)
+        while (cur != null) {
+            ans += carry * cur.`val`
+            carry = carry.shr(1)
+            cur = cur.next
+        }
+        return ans
+    }
 }
