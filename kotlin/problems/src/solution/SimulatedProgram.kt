@@ -1,6 +1,5 @@
 package solution
 
-import data.structure.ListNode
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -320,4 +319,24 @@ class SimulatedProgram {
         return area
     }
 
+    /**
+     * https://leetcode-cn.com/problems/surface-area-of-3d-shapes/
+     */
+    fun surfaceArea(grid: Array<IntArray>): Int {
+        var ans = 0
+        grid.forEachIndexed { i, ints ->
+            ints.forEachIndexed { j, n ->
+                if (n > 0) {
+                    ans += 4 * n + 2
+                    if (j > 0) {
+                        ans -= min(ints[j - 1], n) * 2
+                    }
+                    if (i > 0) {
+                        ans -= min(grid[i - 1][j], n) * 2
+                    }
+                }
+            }
+        }
+        return ans
+    }
 }
