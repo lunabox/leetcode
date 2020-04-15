@@ -333,4 +333,25 @@ class SimulatedProgram {
         val index = vote.indexOfFirst { it == N - 1 }
         return if (index >= 0) index + 1 else -1
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-135/problems/valid-boomerang/
+     */
+    fun isBoomerang(points: Array<IntArray>): Boolean {
+        if (points[0][1] == points[1][1] && points[0][0] == points[1][0] ||
+            points[1][1] == points[2][1] && points[1][0] == points[2][0] ||
+            points[0][1] == points[2][1] && points[0][0] == points[2][0]
+        ) {
+            return false
+        }
+        // x相同
+        if (points[0][0] == points[1][0]) {
+            return points[0][0] != points[2][0]
+        }
+        // y相同
+        if (points[0][1] == points[1][1]) {
+            return points[0][1] != points[2][1]
+        }
+        return (points[2][1] - points[0][1]) * (points[1][0] - points[0][0]) != (points[2][0] - points[0][0]) * (points[1][1] - points[0][1])
+    }
 }
