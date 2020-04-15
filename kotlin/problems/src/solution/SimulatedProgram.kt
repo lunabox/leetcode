@@ -354,4 +354,26 @@ class SimulatedProgram {
         }
         return (points[2][1] - points[0][1]) * (points[1][0] - points[0][0]) != (points[2][0] - points[0][0]) * (points[1][1] - points[0][1])
     }
+
+    /**
+     * https://leetcode-cn.com/problems/surface-area-of-3d-shapes/
+     */
+    fun surfaceArea(grid: Array<IntArray>): Int {
+        var ans = 0
+        grid.forEachIndexed { i, ints ->
+            ints.forEachIndexed { j, n ->
+                if (n > 0) {
+                    ans += 4 * n + 2
+                    if (j > 0) {
+                        ans -= min(ints[j - 1], n) * 2
+                    }
+                    if (i > 0) {
+                        ans -= min(grid[i - 1][j], n) * 2
+                    }
+                }
+            }
+        }
+        return ans
+    }
+
 }

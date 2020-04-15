@@ -897,4 +897,30 @@ class NumberProblems {
         }
         return ((a + b) % 1000000007L).toInt()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/missing-number-lcci/
+     */
+    fun missingNumber(nums: IntArray): Int {
+        return nums.size * (nums.size + 1) / 2 - nums.sum()
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+     */
+    fun findNumberIn2DArray(matrix: Array<IntArray>, target: Int): Boolean {
+        if (matrix.isEmpty() || matrix[0].isEmpty()) {
+            return false
+        }
+        var row = 0
+        var col = matrix[0].lastIndex
+        while (row < matrix.size && col >= 0) {
+            when {
+                target == matrix[row][col] -> return true
+                target > matrix[row][col] -> row++
+                else -> col--
+            }
+        }
+        return false
+    }
 }
