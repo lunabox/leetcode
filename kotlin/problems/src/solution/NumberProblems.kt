@@ -231,20 +231,14 @@ class NumberProblems {
      */
     fun merge(intervals: Array<IntArray>): Array<IntArray> {
         val result = ArrayList<IntArray>()
-        intervals.sortBy {
-            it[0]
-        }
+        intervals.sortBy { it[0] }
         intervals.forEach {
-            if (result.isEmpty()) {
-                result.add(it)
-            } else {
-                if (result.last()[1] >= it[0]) {
-                    if (result.last()[1] <= it[1]) {
-                        result.last()[1] = it[1]
-                    }
-                } else {
-                    result.add(it)
+            if (result.isNotEmpty() && result.last()[1] >= it[0]) {
+                if (result.last()[1] <= it[1]) {
+                    result.last()[1] = it[1]
                 }
+            } else {
+                result.add(it)
             }
         }
         val array = Array(result.size) { intArrayOf() }
@@ -923,4 +917,23 @@ class NumberProblems {
         }
         return false
     }
+
+    /**
+     * https://leetcode-cn.com/problems/jump-game/
+     */
+    fun canJump(nums: IntArray): Boolean {
+        var step = 0
+        nums.forEachIndexed { index, i ->
+            step = if (index == 0) {
+                i
+            } else {
+                max(step - 1, i)
+            }
+            if (step == 0 && index < nums.lastIndex) {
+                return false
+            }
+        }
+        return step >= 0
+    }
+
 }
