@@ -212,4 +212,19 @@ class LinkProblems {
         littleCurrent.next = bigList.next
         return littleList.next
     }
+
+    /**
+     * https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/
+     */
+    fun reverseList(head: ListNode?): ListNode? {
+        val ans: ListNode = ListNode(0)
+        var current = head
+        while (current != null) {
+            val temp = current
+            current = current.next
+            temp.next = ans.next
+            ans.next = temp
+        }
+        return ans.next
+    }
 }
