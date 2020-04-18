@@ -950,4 +950,33 @@ class NumberProblems {
         }
         return if (m < 0) 1 - m else 1
     }
+
+    /**
+     * https://leetcode-cn.com/contest/biweekly-contest-24/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/
+     */
+    fun findMinFibonacciNumbers(k: Int): Int {
+        val fibonacci = mutableListOf<Int>()
+        var a = 1
+        var b = 1
+        fibonacci.add(a)
+        fibonacci.add(b)
+        while (fibonacci.last() < k) {
+            val n = a + b
+            fibonacci.add(n)
+            a = b
+            b = n
+        }
+        var count = 0
+        var sum = k
+        for (i in fibonacci.lastIndex downTo 0) {
+            if (fibonacci[i] <= sum) {
+                sum -= fibonacci[i]
+                count++
+                if (sum == 0) {
+                    return count
+                }
+            }
+        }
+        return count
+    }
 }
