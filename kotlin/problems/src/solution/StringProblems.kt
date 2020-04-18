@@ -585,4 +585,39 @@ class StringProblems {
         return ans
     }
 
+    /**
+     * https://leetcode-cn.com/contest/biweekly-contest-24/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/
+     */
+    fun getHappyString(n: Int, k: Int): String {
+        val happy = mutableListOf<String>()
+        happyDFS("", n, happy)
+        if (happy.size < k) {
+            return ""
+        }
+        happy.sort()
+        return happy[k - 1]
+    }
+
+    private val chars = arrayOf('a', 'b', 'c')
+    private fun happyDFS(current: String, n: Int, happy: MutableList<String>) {
+        if (current.length == n) {
+            happy.add(current)
+            return
+        }
+        if (current.isEmpty()) {
+            happyDFS("a", n, happy)
+            happyDFS("b", n, happy)
+            happyDFS("c", n, happy)
+        } else {
+            val usefulChar = mutableListOf<Char>()
+            chars.forEach {
+                if (it != current.last()) {
+                    usefulChar.add(it)
+                }
+            }
+            usefulChar.forEach {
+                happyDFS("$current$it", n, happy)
+            }
+        }
+    }
 }

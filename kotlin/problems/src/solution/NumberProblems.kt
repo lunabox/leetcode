@@ -936,4 +936,18 @@ class NumberProblems {
         return step >= 0
     }
 
+    /**
+     * https://leetcode-cn.com/contest/biweekly-contest-24/problems/minimum-value-to-get-positive-step-by-step-sum/
+     */
+    fun minStartValue(nums: IntArray): Int {
+        var m = Int.MAX_VALUE
+        var sum = 0
+        nums.forEach {
+            sum += it
+            if (sum < m) {
+                m = sum
+            }
+        }
+        return if (m < 0) 1 - m else 1
+    }
 }
