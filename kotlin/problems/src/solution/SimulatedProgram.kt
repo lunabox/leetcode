@@ -376,4 +376,75 @@ class SimulatedProgram {
         return ans
     }
 
+    /**
+     *
+     */
+    fun minCount(coins: IntArray): Int {
+        var sum = 0
+        coins.forEach {
+            sum += (it + 1) / 2
+        }
+        return sum
+    }
+
+    private var wayCount = 0
+
+    /**
+     *
+     */
+    fun numWays(n: Int, relation: Array<IntArray>, k: Int): Int {
+        wayDfs(n, k, 0, 0, relation)
+        return wayCount
+    }
+
+    private fun wayDfs(n: Int, k: Int, level: Int, pos: Int, relation: Array<IntArray>) {
+        if (level == k) { // k轮
+            if (pos == n - 1) {
+                wayCount++
+            }
+            return
+        }
+        relation.forEach {
+            if (it[0] == pos) {
+                wayDfs(n, k, level + 1, it[1], relation)
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    fun getTriggerTime(increase: Array<IntArray>, requirements: Array<IntArray>): IntArray {
+        val m = IntArray(3) { 0 }
+        val ans = IntArray(requirements.size) { -1 }
+        val rSort = Array(requirements.size) { IntArray(4) }
+        var startIndex = 0
+        requirements.forEachIndexed { index, ints ->
+            rSort[index][0] = ints[0]
+            rSort[index][1] = ints[1]
+            rSort[index][2] = ints[2]
+            rSort[index][3] = index
+            if (ints[0] == 0 && ints[1] == 0 && ints[2] == 0) {
+                ans[index] = 0
+            }
+        }
+
+        increase.forEachIndexed { index, it ->
+            m[0] += it[0]
+            m[1] += it[1]
+            m[2] += it[2]
+            val start = startIndex
+            for (i in start until rSort.size) {
+                if (ans[rSort[i][3]] == -1 && rSort[i][0] <= m[0] && rSort[i][1] <= m[1] && rSort[i][2] <= m[2]) {
+                    ans[rSort[i][3]] = index + 1
+
+                    val temp = rSort[i]
+                    rSort[i] = rSort[startIndex]
+                    rSort[startIndex] = temp
+                    startIndex++
+                }
+            }
+        }
+        return ans
+    }
 }
