@@ -1,5 +1,6 @@
 package solution
 
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -619,5 +620,41 @@ class StringProblems {
                 happyDFS("$current$it", n, happy)
             }
         }
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-185/problems/reformat-the-string/
+     */
+    fun reformat(s: String): String {
+        val letters = mutableListOf<Char>()
+        val nums = mutableListOf<Char>()
+        s.forEach {
+            if (it.isLetter()) {
+                letters.add(it)
+            } else {
+                nums.add(it)
+            }
+        }
+        if (abs(letters.size - nums.size) > 1) {
+            return ""
+        }
+        val ans = StringBuffer()
+        var letterIndex = 0
+        var numsIndex = 0
+        if (letters.size > nums.size) {
+            ans.append(letters[letterIndex++])
+        } else if (letters.size < nums.size) {
+            ans.append(nums[numsIndex++])
+        }
+        while (letterIndex < letters.size && numsIndex < nums.size) {
+            if (letterIndex >= numsIndex) {
+                ans.append(nums[numsIndex++])
+                ans.append(letters[letterIndex++])
+            } else {
+                ans.append(letters[letterIndex++])
+                ans.append(nums[numsIndex++])
+            }
+        }
+        return ans.toString()
     }
 }
