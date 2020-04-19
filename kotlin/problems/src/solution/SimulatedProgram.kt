@@ -447,4 +447,36 @@ class SimulatedProgram {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-185/problems/display-table-of-food-orders-in-a-restaurant/
+     */
+    fun displayTable(orders: List<List<String>>): List<List<String>> {
+        val ans = mutableListOf<List<String>>()
+        val foods = HashSet<String>()
+        val orderMap = HashMap<Int, MutableMap<String, Int>>()
+        orders.forEach { order ->
+            val foodName = order[2]
+            foods.add(foodName)
+            val id = order[1].toInt()
+            if (id in orderMap) {
+                val map = orderMap[id]!!
+                map[foodName] = map[foodName]?.plus(1) ?: 1
+            } else {
+                orderMap[id] = mutableMapOf(Pair(foodName, 1))
+            }
+        }
+        val title = mutableListOf("Table")
+        foods.sorted().forEach { title.add(it) }
+        ans.add(title)
+        orderMap.keys.sorted().forEach { key ->
+            val map = orderMap[key]!!
+            val line = mutableListOf(key.toString())
+            for (i in 1 until title.size) {
+                line.add(map[title[i]]?.toString() ?: "0")
+            }
+            ans.add(line)
+        }
+        return ans
+    }
 }
