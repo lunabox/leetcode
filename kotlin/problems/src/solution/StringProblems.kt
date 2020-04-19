@@ -657,4 +657,25 @@ class StringProblems {
         }
         return ans.toString()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/partition-labels/
+     */
+    fun partitionLabels(S: String): List<Int> {
+        val lastPos = HashMap<Char, Int>()
+        S.forEachIndexed { index, c ->
+            lastPos[c] = index
+        }
+        var endPos = 0
+        var startPos = 0
+        val ans = mutableListOf<Int>()
+        S.forEachIndexed { index, c ->
+            endPos = max(endPos, lastPos[c]!!)
+            if (endPos == index) {
+                ans.add(endPos - startPos + 1)
+                startPos = index + 1
+            }
+        }
+        return ans
+    }
 }
