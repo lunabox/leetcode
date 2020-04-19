@@ -89,28 +89,8 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
-    val arr = Array<IntArray>(5) { IntArray(2) }
-    arr[0] = intArrayOf(1, 3)
-    arr[1] = intArrayOf(1, 4)
-    arr[2] = intArrayOf(2, 3)
-    arr[3] = intArrayOf(2, 4)
-    arr[4] = intArrayOf(4, 3)
+    println(sim.minNumberOfFrogs("croakcroa"))
 
-    println(sim.findJudge(4, arr))
-//    println(
-//        sim.numRookCaptures(
-//            arrayOf(
-//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', 'R', '.', '.', '.', 'p'),
-//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', 'p', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.'),
-//                charArrayOf('.', '.', '.', '.', '.', '.', '.', '.')
-//            )
-//        )
-//    )
 //    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
 //        println(sim.search(ints, ints[0]))
 //    }

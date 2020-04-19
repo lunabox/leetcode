@@ -479,4 +479,33 @@ class SimulatedProgram {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-185/problems/minimum-number-of-frogs-croaking/
+     */
+    fun minNumberOfFrogs(croakOfFrogs: String): Int {
+        val frogs = mutableListOf<Int>()
+        val croak = charArrayOf('c', 'r', 'o', 'a', 'k')
+        croakOfFrogs.forEach {
+            val index = croak.indexOf(it)
+            frogs.forEachIndexed { i, item ->
+                if (item + 1 == index) {
+                    frogs[i]++
+                    if (index == croak.lastIndex) {
+                        frogs[i] = -1
+                    }
+                    return@forEach
+                }
+            }
+            if (index != 0) {
+                return -1
+            }
+            frogs.add(-1)
+            frogs[frogs.lastIndex] = index
+        }
+        if (frogs.count { it == -1 } != frogs.size) {
+            return -1
+        }
+        return frogs.size
+    }
 }
