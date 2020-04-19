@@ -500,8 +500,7 @@ class SimulatedProgram {
             if (index != 0) {
                 return -1
             }
-            frogs.add(-1)
-            frogs[frogs.lastIndex] = index
+            frogs.add(0)
         }
         if (frogs.count { it == -1 } != frogs.size) {
             return -1
