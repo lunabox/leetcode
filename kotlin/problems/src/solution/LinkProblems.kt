@@ -228,5 +228,27 @@ class LinkProblems {
         return ans.next
     }
 
-
+    /**
+     * https://leetcode-cn.com/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/
+     */
+    fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
+        var cur1 = l1
+        var cur2 = l2
+        val ans = ListNode(0)
+        var cur: ListNode = ans
+        while (cur1 != null || cur2 != null) {
+            if (cur2 == null || (cur1 != null && cur1.`val` <= cur2.`val`)) {
+                cur.next = cur1
+                cur1 = cur1!!.next
+                cur = cur.next!!
+                cur.next = null
+            } else if (cur1 == null || (cur2 != null && cur1.`val` > cur2.`val`)) {
+                cur.next = cur2
+                cur2 = cur2.next
+                cur = cur.next!!
+                cur.next = null
+            }
+        }
+        return ans.next
+    }
 }
