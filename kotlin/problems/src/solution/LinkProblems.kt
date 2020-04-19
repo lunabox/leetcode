@@ -242,7 +242,7 @@ class LinkProblems {
                 cur1 = cur1!!.next
                 cur = cur.next!!
                 cur.next = null
-            } else if (cur1 == null || (cur2 != null && cur1.`val` > cur2.`val`)) {
+            } else if (cur1 == null || cur1.`val` > cur2.`val`) {
                 cur.next = cur2
                 cur2 = cur2.next
                 cur = cur.next!!
@@ -250,5 +250,40 @@ class LinkProblems {
             }
         }
         return ans.next
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/palindrome-linked-list-lcci/
+     */
+    fun isPalindrome(head: ListNode?): Boolean {
+        var cur = head
+        var listLength = 0
+        while (cur != null) {
+            listLength++
+            cur = cur.next
+        }
+        cur = head
+        var count = listLength / 2
+        val left = ListNode(0)
+        while (count > 0 && cur != null) {
+            count--
+            val temp = cur
+            cur = cur.next
+            temp.next = left.next
+            left.next = temp
+        }
+        var curLeft = left.next
+        var curRight = cur
+        if (listLength % 2 == 1) {
+            curRight = cur!!.next
+        }
+        while (curLeft != null && curRight != null) {
+            if (curLeft.`val` != curRight.`val`) {
+                return false
+            }
+            curLeft = curLeft.next
+            curRight = curRight.next
+        }
+        return true
     }
 }
