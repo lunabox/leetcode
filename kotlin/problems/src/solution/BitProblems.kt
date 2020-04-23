@@ -1,5 +1,7 @@
 package solution
 
+import kotlin.math.max
+
 class BitProblems {
 
     /**
@@ -45,5 +47,28 @@ class BitProblems {
         }
         mask = mask.shl(i).inv()
         return N.and(mask).or(M.shl(i))
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/binary-gap/
+     */
+    fun binaryGap(N: Int): Int {
+        val bin = ArrayList<Int>(12)
+        var n = N
+        while (n > 0) {
+            bin.add(n % 2)
+            n /= 2
+        }
+        var left = -1
+        var maxDis = 0
+        bin.forEachIndexed { index, i ->
+            if (i == 1) {
+                if (left != -1) {
+                    maxDis = max(maxDis, index - left)
+                }
+                left = index
+            }
+        }
+        return maxDis
     }
 }
