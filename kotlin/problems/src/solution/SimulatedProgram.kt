@@ -532,4 +532,20 @@ class SimulatedProgram {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/gray-code/
+     */
+    fun grayCode(n: Int): List<Int> {
+        val ans = mutableListOf<Int>()
+        ans.add(0)
+        repeat(n) {
+            val size = ans.size
+            for (i in size - 1 downTo 0) {
+                val code = (1).shl(it).or(ans[i])
+                ans.add(code)
+            }
+        }
+        return ans
+    }
 }
