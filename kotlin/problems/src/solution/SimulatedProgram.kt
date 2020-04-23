@@ -576,4 +576,31 @@ class SimulatedProgram {
         }
         return intArrayOf(line, width)
     }
+
+    /**
+     * https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number/
+     */
+    fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
+        val count = Array(101) { 0 }
+        val ans = IntArray(nums.size)
+
+        nums.forEach {
+            count[it]++
+        }
+        var temp = 0
+        count.forEachIndexed { index, i ->
+            if (index > 0) {
+                val small = temp + count[index - 1]
+                temp = i
+                count[index] = small
+            } else {
+                temp = count[0]
+                count[0] = 0
+            }
+        }
+        nums.forEachIndexed { index, i ->
+            ans[index] = count[i]
+        }
+        return ans
+    }
 }
