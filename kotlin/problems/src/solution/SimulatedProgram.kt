@@ -548,4 +548,32 @@ class SimulatedProgram {
         }
         return ans
     }
+
+    fun largestPerimeter(A: IntArray): Int {
+        A.sort()
+        for (i in A.lastIndex downTo 2) {
+            if (A[i - 1] + A[i - 2] > A[i]) {
+                return A[i - 1] + A[i - 2] + A[i]
+            }
+        }
+        return 0
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/number-of-lines-to-write-string/
+     */
+    fun numberOfLines(widths: IntArray, S: String): IntArray {
+        var line = 1
+        var width = 0
+        S.forEach {
+            val charWidth = widths[it - 'a']
+            if (charWidth + width <= 100) {
+                width += charWidth
+            } else {
+                width = charWidth
+                line++
+            }
+        }
+        return intArrayOf(line, width)
+    }
 }
