@@ -1,6 +1,9 @@
 package solution
 
 import data.structure.Employee
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -600,6 +603,37 @@ class SimulatedProgram {
         }
         nums.forEachIndexed { index, i ->
             ans[index] = count[i]
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/maximize-distance-to-closest-person/
+     */
+    fun maxDistToClosest(seats: IntArray): Int {
+        val left = IntArray(seats.size) { seats.size }
+        val right = IntArray(seats.size) { seats.size }
+
+        for (i in seats.indices) {
+            if (seats[i] == 1) {
+                left[i] = 0
+            } else if (i > 0) {
+                left[i] = left[i - 1] + 1
+            }
+        }
+
+        for (i in seats.lastIndex downTo 0) {
+            if (seats[i] == 1) {
+                right[i] = 0
+            } else if (i < seats.lastIndex) {
+                right[i] = right[i + 1] + 1
+            }
+        }
+        var ans = 0
+        seats.forEachIndexed { index, i ->
+            if (i == 0) {
+                ans = max(ans, min(left[index], right[index]))
+            }
         }
         return ans
     }
