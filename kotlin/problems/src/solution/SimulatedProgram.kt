@@ -1,5 +1,6 @@
 package solution
 
+import data.structure.Employee
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -506,5 +507,29 @@ class SimulatedProgram {
             return -1
         }
         return frogs.size
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/employee-importance/
+     */
+    fun getImportance(employees: List<Employee?>, id: Int): Int {
+        val ids = HashMap<Int, Employee>()
+        employees.forEach {
+            if (it != null) {
+                ids[it.id] = it
+            }
+        }
+        var ans = 0
+        val target = mutableListOf<Int>()
+        target.add(id)
+        while (target.isNotEmpty()) {
+            val p = ids[target.first()]
+            if (p != null) {
+                ans += p.importance
+                target.addAll(p.subordinates)
+                target.removeAt(0)
+            }
+        }
+        return ans
     }
 }
