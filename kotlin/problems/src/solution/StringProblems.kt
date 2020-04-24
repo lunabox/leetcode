@@ -678,4 +678,38 @@ class StringProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/buddy-strings/
+     */
+    fun buddyStrings(A: String, B: String): Boolean {
+        if (A.length != B.length) {
+            return false
+        }
+        if (A == B) {
+            val chars = IntArray(26)
+            A.forEach {
+                chars[it - 'a']++
+            }
+            chars.forEach {
+                if (it >= 2) {
+                    return true
+                }
+            }
+            return false
+        } else {
+            var first = -1
+            var second = -1
+            for (i in A.indices) {
+                if (A[i] != B[i]) {
+                    when {
+                        first == -1 -> first = i
+                        second == -1 -> second = i
+                        else -> return false
+                    }
+                }
+            }
+            return first != -1 && second != -1 && A[first] == B[second] && A[second] == B[first]
+        }
+    }
 }
