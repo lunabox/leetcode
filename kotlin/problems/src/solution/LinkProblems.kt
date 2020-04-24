@@ -251,4 +251,27 @@ class LinkProblems {
         }
         return ans.next
     }
+
+    /**
+     * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+     */
+    fun middleNode(head: ListNode?): ListNode? {
+        var listLength = 0
+        var current = head
+        while (current != null) {
+            listLength++
+            current = current.next
+        }
+        val middle = listLength / 2 + 1
+        current = head
+        listLength = 0
+        while (current != null) {
+            listLength++
+            if (listLength == middle) {
+                return current
+            }
+            current = current.next
+        }
+        return null
+    }
 }
