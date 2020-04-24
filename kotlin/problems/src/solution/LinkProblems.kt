@@ -295,4 +295,24 @@ class LinkProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/remove-duplicate-node-lcci/
+     */
+    fun removeDuplicateNodes(head: ListNode?): ListNode? {
+        val buffer = HashSet<Int>()
+        var current = head
+        var before: ListNode? = null
+        while (current != null) {
+            if (current.`val` in buffer) {
+                before!!.next = current.next
+                current = before
+            } else {
+                buffer.add(current.`val`)
+            }
+            before = current
+            current = current.next
+        }
+        return head
+    }
 }
