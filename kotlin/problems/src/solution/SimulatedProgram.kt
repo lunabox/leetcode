@@ -637,4 +637,34 @@ class SimulatedProgram {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/backspace-string-compare/
+     */
+    fun backspaceCompare(S: String, T: String): Boolean {
+        val s = Stack<Char>()
+        val t = Stack<Char>()
+        val action: (String, Stack<Char>) -> Unit = { c, stack ->
+            c.forEach {
+                if (it == '#') {
+                    if (stack.isNotEmpty()) {
+                        stack.pop()
+                    }
+                } else {
+                    stack.push(it)
+                }
+            }
+        }
+        action(S, s)
+        action(T, t)
+        if (s.size != t.size) {
+            return false
+        }
+        for (i in s.indices) {
+            if (s.pop() != t.pop()) {
+                return false
+            }
+        }
+        return true
+    }
 }
