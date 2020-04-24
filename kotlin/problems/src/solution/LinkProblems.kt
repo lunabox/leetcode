@@ -274,4 +274,25 @@ class LinkProblems {
         }
         return null
     }
+
+    /**
+     * https://leetcode-cn.com/problems/linked-list-components/
+     */
+    fun numComponents(head: ListNode?, G: IntArray): Int {
+        var ans = 0
+        var current = head
+        var inList = false
+        while (current != null) {
+            if (current.`val` in G) {
+                if (!inList) {
+                    inList = true
+                    ans++
+                }
+            } else {
+                inList = false
+            }
+            current = current.next
+        }
+        return ans
+    }
 }
