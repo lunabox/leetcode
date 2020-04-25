@@ -979,4 +979,21 @@ class NumberProblems {
         }
         return count
     }
+
+    /**
+     * https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/
+     */
+    fun isOneBitCharacter(bits: IntArray): Boolean {
+        var index = 0
+        while (index < bits.size) {
+            if (index == bits.lastIndex && bits[index] == 0) {
+                return true
+            }
+            when (bits[index]) {
+                0 -> index++
+                1 -> index += 2
+            }
+        }
+        return false
+    }
 }

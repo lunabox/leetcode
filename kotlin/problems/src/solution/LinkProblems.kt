@@ -253,6 +253,7 @@ class LinkProblems {
     }
 
     /**
+    <<<<<<< HEAD
      * https://leetcode-cn.com/problems/palindrome-linked-list-lcci/
      */
     fun isPalindrome(head: ListNode?): Boolean {
@@ -308,5 +309,69 @@ class LinkProblems {
             cur = cur.next
         }
         return 0
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+     */
+    fun middleNode(head: ListNode?): ListNode? {
+        var listLength = 0
+        var current = head
+        while (current != null) {
+            listLength++
+            current = current.next
+        }
+        val middle = listLength / 2 + 1
+        current = head
+        listLength = 0
+        while (current != null) {
+            listLength++
+            if (listLength == middle) {
+                return current
+            }
+            current = current.next
+        }
+        return null
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/linked-list-components/
+     */
+    fun numComponents(head: ListNode?, G: IntArray): Int {
+        var ans = 0
+        var current = head
+        var inList = false
+        while (current != null) {
+            if (current.`val` in G) {
+                if (!inList) {
+                    inList = true
+                    ans++
+                }
+            } else {
+                inList = false
+            }
+            current = current.next
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/remove-duplicate-node-lcci/
+     */
+    fun removeDuplicateNodes(head: ListNode?): ListNode? {
+        val buffer = HashSet<Int>()
+        var current = head
+        var before: ListNode? = null
+        while (current != null) {
+            if (current.`val` in buffer) {
+                before!!.next = current.next
+                current = before
+            } else {
+                buffer.add(current.`val`)
+            }
+            before = current
+            current = current.next
+        }
+        return head
     }
 }

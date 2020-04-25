@@ -1,5 +1,9 @@
 package solution
 
+import data.structure.Employee
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -506,5 +510,161 @@ class SimulatedProgram {
             return -1
         }
         return frogs.size
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/employee-importance/
+     */
+    fun getImportance(employees: List<Employee?>, id: Int): Int {
+        val ids = HashMap<Int, Employee>()
+        employees.forEach {
+            if (it != null) {
+                ids[it.id] = it
+            }
+        }
+        var ans = 0
+        val target = mutableListOf<Int>()
+        target.add(id)
+        while (target.isNotEmpty()) {
+            val p = ids[target.first()]
+            if (p != null) {
+                ans += p.importance
+                target.addAll(p.subordinates)
+                target.removeAt(0)
+            }
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/gray-code/
+     */
+    fun grayCode(n: Int): List<Int> {
+        val ans = mutableListOf<Int>()
+        ans.add(0)
+        repeat(n) {
+            val size = ans.size
+            for (i in size - 1 downTo 0) {
+                val code = (1).shl(it).or(ans[i])
+                ans.add(code)
+            }
+        }
+        return ans
+    }
+
+    fun largestPerimeter(A: IntArray): Int {
+        A.sort()
+        for (i in A.lastIndex downTo 2) {
+            if (A[i - 1] + A[i - 2] > A[i]) {
+                return A[i - 1] + A[i - 2] + A[i]
+            }
+        }
+        return 0
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/number-of-lines-to-write-string/
+     */
+    fun numberOfLines(widths: IntArray, S: String): IntArray {
+        var line = 1
+        var width = 0
+        S.forEach {
+            val charWidth = widths[it - 'a']
+            if (charWidth + width <= 100) {
+                width += charWidth
+            } else {
+                width = charWidth
+                line++
+            }
+        }
+        return intArrayOf(line, width)
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number/
+     */
+    fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
+        val count = Array(101) { 0 }
+        val ans = IntArray(nums.size)
+
+        nums.forEach {
+            count[it]++
+        }
+        var temp = 0
+        count.forEachIndexed { index, i ->
+            if (index > 0) {
+                val small = temp + count[index - 1]
+                temp = i
+                count[index] = small
+            } else {
+                temp = count[0]
+                count[0] = 0
+            }
+        }
+        nums.forEachIndexed { index, i ->
+            ans[index] = count[i]
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/maximize-distance-to-closest-person/
+     */
+    fun maxDistToClosest(seats: IntArray): Int {
+        val left = IntArray(seats.size) { seats.size }
+        val right = IntArray(seats.size) { seats.size }
+
+        for (i in seats.indices) {
+            if (seats[i] == 1) {
+                left[i] = 0
+            } else if (i > 0) {
+                left[i] = left[i - 1] + 1
+            }
+        }
+
+        for (i in seats.lastIndex downTo 0) {
+            if (seats[i] == 1) {
+                right[i] = 0
+            } else if (i < seats.lastIndex) {
+                right[i] = right[i + 1] + 1
+            }
+        }
+        var ans = 0
+        seats.forEachIndexed { index, i ->
+            if (i == 0) {
+                ans = max(ans, min(left[index], right[index]))
+            }
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/backspace-string-compare/
+     */
+    fun backspaceCompare(S: String, T: String): Boolean {
+        val s = Stack<Char>()
+        val t = Stack<Char>()
+        val action: (String, Stack<Char>) -> Unit = { c, stack ->
+            c.forEach {
+                if (it == '#') {
+                    if (stack.isNotEmpty()) {
+                        stack.pop()
+                    }
+                } else {
+                    stack.push(it)
+                }
+            }
+        }
+        action(S, s)
+        action(T, t)
+        if (s.size != t.size) {
+            return false
+        }
+        for (i in s.indices) {
+            if (s.pop() != t.pop()) {
+                return false
+            }
+        }
+        return true
     }
 }
