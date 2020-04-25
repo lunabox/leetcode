@@ -286,4 +286,27 @@ class LinkProblems {
         }
         return true
     }
+
+    /**
+     * https://leetcode-cn.com/problems/kth-node-from-end-of-list-lcci/
+     */
+    fun kthToLast(head: ListNode?, k: Int): Int {
+        var cur = head
+        var listLength = 0
+        while (cur != null) {
+            listLength++
+            cur = cur.next
+        }
+        val pos = listLength - k + 1
+        cur = head
+        listLength = 0
+        while (cur != null) {
+            listLength++
+            if (listLength == pos) {
+                return cur.`val`
+            }
+            cur = cur.next
+        }
+        return 0
+    }
 }
