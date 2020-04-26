@@ -1016,4 +1016,30 @@ class NumberProblems {
         }
         return maxIndex
     }
+
+    /**
+     * https://leetcode-cn.com/problems/lucky-numbers-in-a-matrix/
+     */
+    fun luckyNumbers(matrix: Array<IntArray>): List<Int> {
+        val ans = mutableListOf<Int>()
+        val minNumberIndex = IntArray(matrix.size)
+        matrix.forEachIndexed { index, ints ->
+            var m = Int.MAX_VALUE
+            ints.forEachIndexed { j, n ->
+                if (n < m) {
+                    m = n
+                    minNumberIndex[index] = j
+                }
+            }
+        }
+        minNumberIndex.forEachIndexed { index, i ->
+            for (j in matrix.indices) {
+                if (matrix[j][i] > matrix[index][i]) {
+                    return@forEachIndexed
+                }
+            }
+            ans.add(matrix[index][i])
+        }
+        return ans
+    }
 }
