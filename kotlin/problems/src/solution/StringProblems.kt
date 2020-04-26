@@ -712,4 +712,31 @@ class StringProblems {
             return first != -1 && second != -1 && A[first] == B[second] && A[second] == B[first]
         }
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-186/problems/maximum-score-after-splitting-a-string/
+     */
+    fun maxScore(s: String): Int {
+        val left = IntArray(s.length)
+        val right = IntArray(s.length)
+        var ans = 0
+        for (i in s.indices) {
+            if (i == 0) {
+                left[0] = if (s[i] == '0') 1 else 0
+            } else {
+                left[i] = left[i - 1] + if (s[i] == '0') 1 else 0
+            }
+        }
+        for (i in s.lastIndex downTo 0) {
+            if (i == s.lastIndex) {
+                right[i] = if (s[i] == '1') 1 else 0
+            } else {
+                right[i] = right[i + 1] + if (s[i] == '1') 1 else 0
+            }
+        }
+        for (i in 0 until s.lastIndex) {
+            ans = max(ans, left[i] + right[i + 1])
+        }
+        return ans
+    }
 }

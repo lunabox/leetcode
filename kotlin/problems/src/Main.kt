@@ -15,7 +15,7 @@ fun main() {
 //    println(g.checkOverlap(1, 1, 1, 1, -3, 2, -1))
 
     val sp = StringProblems()
-    println(sp.buddyStrings("ab", "ab"))
+//    println(sp.buddyStrings("ab", "ab"))
 //    sp.restoreIpAddresses("0279245587303").forEach {
 //        println(it)
 //    }
@@ -90,6 +90,7 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
+    sim.findDiagonalOrder(arrayListOf(arrayListOf(1,2,3), arrayListOf(4,5,6), arrayListOf(7,8,9))).forEach { println(it) }
 //    println(sim.maxDistToClosest(intArrayOf(1, 0, 0, 0, 1, 0, 1)))
 
 //    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->

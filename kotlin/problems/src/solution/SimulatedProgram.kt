@@ -667,4 +667,42 @@ class SimulatedProgram {
         }
         return true
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-186/problems/diagonal-traverse-ii/
+     */
+    fun findDiagonalOrder(nums: List<List<Int>>): IntArray {
+        val ans = mutableListOf<Int>()
+        var x = 0
+        var y = 0
+        for (height in nums.indices) {
+            x = height
+            y = 0
+            while (x >= 0 && y <= height) {
+                if (y < nums[x].size) {
+                    ans.add(nums[x][y])
+                }
+                x--
+                y++
+            }
+        }
+        var maxWidth = 0
+        nums.forEach { list ->
+            if (list.size > maxWidth) {
+                maxWidth = list.size
+            }
+        }
+        for (width in 1 until maxWidth) {
+            y = width
+            x = nums.lastIndex
+            while (x >= 0 && y < maxWidth) {
+                if (y < nums[x].size) {
+                    ans.add(nums[x][y])
+                }
+                x--
+                y++
+            }
+        }
+        return ans.toIntArray()
+    }
 }
