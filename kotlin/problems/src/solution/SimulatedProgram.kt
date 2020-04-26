@@ -669,40 +669,27 @@ class SimulatedProgram {
     }
 
     /**
-     * https://leetcode-cn.com/contest/weekly-contest-186/problems/diagonal-traverse-ii/
+     * https://leetcode-cn.com/problems/diagonal-traverse-ii/
      */
     fun findDiagonalOrder(nums: List<List<Int>>): IntArray {
         val ans = mutableListOf<Int>()
-        var x = 0
-        var y = 0
-        for (height in nums.indices) {
-            x = height
-            y = 0
-            while (x >= 0 && y <= height) {
-                if (y < nums[x].size) {
-                    ans.add(nums[x][y])
-                }
-                x--
-                y++
+        val queue = LinkedList<IntArray>()
+        val addQueue: (LinkedList<IntArray>, Int, Int, List<MutableList<Int>>) -> Unit = { q, i, j, n ->
+            if (i < nums.size && j < nums[i].size && nums[i][j] >= 0) {
+                val num = n[i][j]
+                n[i][j] = -num
+                q.add(intArrayOf(i, j, num))
             }
         }
-        var maxWidth = 0
-        nums.forEach { list ->
-            if (list.size > maxWidth) {
-                maxWidth = list.size
-            }
-        }
-        for (width in 1 until maxWidth) {
-            y = width
-            x = nums.lastIndex
-            while (x >= 0 && y < maxWidth) {
-                if (y < nums[x].size) {
-                    ans.add(nums[x][y])
-                }
-                x--
-                y++
-            }
+        addQueue(queue, 0, 0, nums as List<MutableList<Int>>)
+        while (queue.isNotEmpty()) {
+            val item = queue.pop()
+            ans.add(item[2])
+
+            addQueue(queue, item[0] + 1, item[1], nums)
+            addQueue(queue, item[0], item[1] + 1, nums)
         }
         return ans.toIntArray()
     }
+
 }
