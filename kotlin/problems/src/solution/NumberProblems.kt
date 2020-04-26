@@ -996,4 +996,24 @@ class NumberProblems {
         }
         return false
     }
+
+    /**
+     * https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/
+     */
+    fun dominantIndex(nums: IntArray): Int {
+        var maxNum = 0
+        var maxIndex = 0
+        nums.forEachIndexed { index, i ->
+            if (i > maxNum) {
+                maxNum = i
+                maxIndex = index
+            }
+        }
+        nums.forEachIndexed { index, i ->
+            if (index != maxIndex && i * 2 > maxNum) {
+                return -1
+            }
+        }
+        return maxIndex
+    }
 }
