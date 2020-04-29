@@ -56,4 +56,5 @@ object NumberCase {
             action(index, element)
         }
     }
+
 }

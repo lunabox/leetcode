@@ -1,3 +1,4 @@
+import case.print
 import data.structure.LFUCache
 import data.structure.ListNode
 import solution.*
@@ -96,7 +97,7 @@ fun main() {
 //    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
 //        println(sim.search(ints, ints[0]))
 //    }
-//    println(sim.coinChange(intArrayOf(2,6), 7))
+    println(sim.coinChange(intArrayOf(2,6), 7))
 }
 
 

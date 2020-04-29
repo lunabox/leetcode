@@ -1042,4 +1042,26 @@ class NumberProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/sort-array-by-parity-ii/
+     */
+    fun sortArrayByParityII(A: IntArray): IntArray {
+        var even = 0
+        var odd = 1
+        while (odd < A.size || even < A.size) {
+            while (even < A.size && A[even] % 2 == 0) {
+                even += 2
+            }
+            while (odd < A.size && A[odd] % 2 == 1) {
+                odd += 2
+            }
+            if (odd < A.size && even < A.size) {
+                val temp = A[odd]
+                A[odd] = A[even]
+                A[even] = temp
+            }
+        }
+        return A
+    }
 }
