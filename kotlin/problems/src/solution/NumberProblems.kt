@@ -1064,4 +1064,26 @@ class NumberProblems {
         }
         return A
     }
+
+    /**
+     * https://leetcode-cn.com/problems/relative-sort-array/
+     */
+    fun relativeSortArray(arr1: IntArray, arr2: IntArray): IntArray {
+        val ans = mutableListOf<Int>()
+        val nums = IntArray(1001) { 0 }
+        arr1.forEach { nums[it]++ }
+        arr2.forEach {
+            while (nums[it] != 0) {
+                nums[it]--
+                ans.add(it)
+            }
+        }
+        for (i in 1..1000) {
+            while (nums[i] != 0) {
+                nums[i]--
+                ans.add(i)
+            }
+        }
+        return ans.toIntArray()
+    }
 }
