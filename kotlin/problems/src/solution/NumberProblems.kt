@@ -1,10 +1,7 @@
 package solution
 
 import java.math.BigInteger
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.sqrt
+import kotlin.math.*
 
 class NumberProblems {
 
@@ -1176,5 +1173,21 @@ class NumberProblems {
             return intArrayOf(left, right)
         }
         return intArrayOf(-1, -1)
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/powerful-integers/
+     */
+    fun powerfulIntegers(x: Int, y: Int, bound: Int): List<Int> {
+        val ans = HashSet<Int>()
+        for (i in 0 until 20) {
+            for (j in 0 until 20) {
+                val n = x.toDouble().pow(i) + y.toDouble().pow(j)
+                if (n <= bound) {
+                    ans.add(n.toInt())
+                }
+            }
+        }
+        return ans.toList()
     }
 }
