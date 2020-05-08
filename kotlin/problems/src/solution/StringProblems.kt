@@ -1,5 +1,9 @@
 package solution
 
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -756,5 +760,28 @@ class StringProblems {
             ans.add(name + it.substring(index))
         }
         return ans.size
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/
+     */
+    fun removeDuplicates(S: String): String {
+        val list = mutableListOf<Char>()
+        S.forEach { list.add(it) }
+        var hasRemove = true
+        while (hasRemove) {
+            hasRemove = false
+            var i = 0
+            while (i < list.size - 1) {
+                if (list[i] == list[i + 1]) {
+                    hasRemove = true
+                    list.removeAt(i)
+                    list.removeAt(i)
+                } else {
+                    i++
+                }
+            }
+        }
+        return String(list.toCharArray())
     }
 }
