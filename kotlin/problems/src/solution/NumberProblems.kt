@@ -1086,4 +1086,24 @@ class NumberProblems {
         }
         return ans.toIntArray()
     }
+
+    /**
+     * https://leetcode-cn.com/problems/squares-of-a-sorted-array/
+     */
+    fun sortedSquares(A: IntArray): IntArray {
+        val ans = IntArray(A.size)
+        val positive = A.filter { it >= 0 }.map { it * it }
+        var right = 0
+        val negative = A.filter { it < 0 }.map { it * it }
+        var left = negative.size - 1
+        for (i in ans.indices) {
+            ans[i] = when {
+                right == positive.size -> negative[left--]
+                left == -1 -> positive[right++]
+                positive[right] >= negative[left] -> negative[left--]
+                else -> positive[right++]
+            }
+        }
+        return ans
+    }
 }
