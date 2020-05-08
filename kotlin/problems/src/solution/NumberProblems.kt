@@ -1106,4 +1106,75 @@ class NumberProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/sum-of-even-numbers-after-queries/
+     * 暴力会超时
+     */
+    fun sumEvenAfterQueries(A: IntArray, queries: Array<IntArray>): IntArray {
+        val ans = IntArray(queries.size)
+        var base = A.filter { it % 2 == 0 }.sum()
+        queries.forEachIndexed { index, ints ->
+            val before = A[ints[1]]
+            A[ints[1]] += ints[0]
+            val after = A[ints[1]]
+            if (before % 2 == 0) {
+                // 偶数
+                if (after % 2 == 0) {
+                    ans[index] = base - before + after
+                } else {
+                    ans[index] = base - before
+                }
+            } else if (after % 2 == 0) {
+                ans[index] = base + after
+            } else {
+                ans[index] = base
+            }
+            base = ans[index]
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+     */
+    fun searchRange(nums: IntArray, target: Int): IntArray {
+        var left = 0
+        var right = nums.lastIndex
+        var mid: Int
+        var index = -1
+        while (left <= right) {
+            mid = (left + right) / 2
+            if (nums[mid] > target) {
+                right = mid - 1
+            } else if (nums[mid] < target) {
+                left = mid + 1
+            } else {
+                index = mid
+                break
+            }
+        }
+        if (index > -1) {
+            left = index
+            while (left >= 0 && nums[left] == target) {
+                left--
+            }
+            if (left == -1) {
+                left = 0
+            } else {
+                left++
+            }
+            right = index
+            while (right < nums.size && nums[right] == target) {
+                right++
+            }
+            if (right == nums.size) {
+                right = nums.lastIndex
+            } else {
+                right--
+            }
+            return intArrayOf(left, right)
+        }
+        return intArrayOf(-1, -1)
+    }
 }

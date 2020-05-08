@@ -41,6 +41,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
+    np.searchRange(intArrayOf(5, 7, 7, 7, 8, 8, 10), 7).print()
 //    println(np.multiply("123", "456"))
 //    println(np.numSteps("1"))
 //    println(np.myAtoi("20000000000000000000"))
@@ -91,13 +92,13 @@ fun main() {
 //    println(simulatedProgram.judgeCircle("UDRL"))
 
     val sim = SimulatedProgram()
-    sim.findDiagonalOrder(arrayListOf(arrayListOf(1,2,3), arrayListOf(4,5,6), arrayListOf(7,8,9))).forEach { println(it) }
+//    sim.findDiagonalOrder(arrayListOf(arrayListOf(1,2,3), arrayListOf(4,5,6), arrayListOf(7,8,9))).forEach { println(it) }
 //    println(sim.maxDistToClosest(intArrayOf(1, 0, 0, 0, 1, 0, 1)))
 
 //    NumberCase.randomIntArray(0, 10, 10, 5).forEachCase { i, ints ->
 //        println(sim.search(ints, ints[0]))
 //    }
-    println(sim.coinChange(intArrayOf(2,6), 7))
+//    println(sim.coinChange(intArrayOf(2,6), 7))
 }
 
 
