@@ -692,4 +692,26 @@ class SimulatedProgram {
         return ans.toIntArray()
     }
 
+    /**
+     * https://leetcode-cn.com/problems/jewels-and-stones/
+     */
+    fun numJewelsInStones(J: String, S: String): Int {
+        val flag = IntArray(52) { 0 }
+        var ans = 0
+        J.forEach {
+            if (it.isLowerCase()) {
+                flag[it - 'a']++
+            } else if (it.isUpperCase()) {
+                flag[it - 'A' + 26]++
+            }
+        }
+        S.forEach {
+            if (it.isLowerCase()) {
+                ans += if (flag[it - 'a'] > 0) 1 else 0
+            } else if (it.isUpperCase()) {
+                ans += if (flag[it - 'A' + 26] > 0) 1 else 0
+            }
+        }
+        return ans
+    }
 }
