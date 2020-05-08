@@ -739,4 +739,22 @@ class StringProblems {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/problems/unique-email-addresses/
+     */
+    fun numUniqueEmails(emails: Array<String>): Int {
+        val ans = HashSet<String>()
+        emails.forEach {
+            val index = it.indexOf("@")
+            var name = it.substring(0, index)
+            name = name.replace(".", "")
+            val plusIndex = name.indexOf("+")
+            if (plusIndex > -1) {
+                name = name.substring(0, plusIndex)
+            }
+            ans.add(name + it.substring(index))
+        }
+        return ans.size
+    }
 }
