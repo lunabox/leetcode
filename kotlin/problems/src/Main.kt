@@ -41,7 +41,7 @@ fun main() {
 //    println(sp.validIPAddress("00.0.0.0"))
 
     val np = NumberProblems()
-    np.searchRange(intArrayOf(5, 7, 7, 7, 8, 8, 10), 7).print()
+//    np.searchRange(intArrayOf(5, 7, 7, 7, 8, 8, 10), 7).print()
 //    println(np.multiply("123", "456"))
 //    println(np.numSteps("1"))
 //    println(np.myAtoi("20000000000000000000"))
@@ -99,6 +99,8 @@ fun main() {
 //        println(sim.search(ints, ints[0]))
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
+    val week = WeeklyContest()
+    println(week.maxVowels("weallloveyou", 7))
 }
 
 
