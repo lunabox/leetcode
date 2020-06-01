@@ -96,4 +96,37 @@ class WeeklyContest {
         }
         return maxCount
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-191/problems/maximum-product-of-two-elements-in-an-array/
+     */
+    fun maxProduct(nums: IntArray): Int {
+        var ans = -1
+        for (i in nums.indices) {
+            for (j in i + 1 until nums.size) {
+                ans = max(ans, (nums[i] - 1) * (nums[j] - 1))
+            }
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-191/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/
+     */
+    fun maxArea(h: Int, w: Int, horizontalCuts: IntArray, verticalCuts: IntArray): Int {
+        horizontalCuts.sort()
+        var maxH = horizontalCuts.first()
+        for (i in 1 until horizontalCuts.size) {
+            maxH = max(maxH, horizontalCuts[i] - horizontalCuts[i - 1])
+        }
+        maxH = max(maxH, h - horizontalCuts.last())
+
+        verticalCuts.sort()
+        var maxV = verticalCuts.first()
+        for (i in 1 until verticalCuts.size) {
+            maxV = max(maxV, verticalCuts[i] - verticalCuts[i - 1])
+        }
+        maxV = max(maxV, w - verticalCuts.last())
+        return ((maxH.toLong() * maxV.toLong()) % 1000000007L).toInt()
+    }
 }

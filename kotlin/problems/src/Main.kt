@@ -100,7 +100,7 @@ fun main() {
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
     val week = WeeklyContest()
-    println(week.maxVowels("weallloveyou", 7))
+    println(week.maxArea(5, 4, intArrayOf(3, 1), intArrayOf(1)))
 }
 
 
