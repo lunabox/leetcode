@@ -1,5 +1,6 @@
 package solution
 
+import kotlin.math.abs
 import kotlin.math.max
 
 class WeeklyContest {
@@ -128,5 +129,43 @@ class WeeklyContest {
         }
         maxV = max(maxV, w - verticalCuts.last())
         return ((maxH.toLong() * maxV.toLong()) % 1000000007L).toInt()
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-192/problems/shuffle-the-array/
+     */
+    fun shuffle(nums: IntArray, n: Int): IntArray {
+        val ans = IntArray(nums.size)
+        var index = 0
+        repeat(n) {
+            ans[index++] = nums[it]
+            ans[index++] = nums[it + n]
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-192/problems/the-k-strongest-values-in-an-array/
+     */
+    fun getStrongest(arr: IntArray, k: Int): IntArray {
+        arr.sort()
+        val m = arr[(arr.size - 1) / 2]
+        return arr.sortedWith(Comparator { o1, o2 ->
+            val s1 = abs(o1 - m)
+            val s2 = abs(o2 - m)
+            if (s1 == s2) {
+                return@Comparator if (o1 > o2) {
+                    -1
+                } else {
+                    1
+                }
+            } else {
+                return@Comparator if (s1 > s2) {
+                    -1
+                } else {
+                    1
+                }
+            }
+        }).subList(0, k).toIntArray()
     }
 }

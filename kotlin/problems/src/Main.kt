@@ -1,7 +1,7 @@
 import case.print
-import data.structure.LFUCache
-import data.structure.ListNode
+import data.structure.BrowserHistory
 import solution.*
+
 
 fun main() {
     val linkNode = LinkProblems()
@@ -100,7 +100,7 @@ fun main() {
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
     val week = WeeklyContest()
-    println(week.maxArea(5, 4, intArrayOf(3, 1), intArrayOf(1)))
+    week.getStrongest(intArrayOf(1, 2, 3, 4, 5), 2).print()
 }
 
 
