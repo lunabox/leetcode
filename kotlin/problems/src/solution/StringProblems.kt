@@ -1,5 +1,9 @@
 package solution
 
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -738,5 +742,46 @@ class StringProblems {
             ans = max(ans, left[i] + right[i + 1])
         }
         return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/unique-email-addresses/
+     */
+    fun numUniqueEmails(emails: Array<String>): Int {
+        val ans = HashSet<String>()
+        emails.forEach {
+            val index = it.indexOf("@")
+            var name = it.substring(0, index)
+            name = name.replace(".", "")
+            val plusIndex = name.indexOf("+")
+            if (plusIndex > -1) {
+                name = name.substring(0, plusIndex)
+            }
+            ans.add(name + it.substring(index))
+        }
+        return ans.size
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/
+     */
+    fun removeDuplicates(S: String): String {
+        val list = mutableListOf<Char>()
+        S.forEach { list.add(it) }
+        var hasRemove = true
+        while (hasRemove) {
+            hasRemove = false
+            var i = 0
+            while (i < list.size - 1) {
+                if (list[i] == list[i + 1]) {
+                    hasRemove = true
+                    list.removeAt(i)
+                    list.removeAt(i)
+                } else {
+                    i++
+                }
+            }
+        }
+        return String(list.toCharArray())
     }
 }
