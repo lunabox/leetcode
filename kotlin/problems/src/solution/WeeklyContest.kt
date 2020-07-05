@@ -203,4 +203,91 @@ class WeeklyContest {
             }
         }).subList(0, k).toIntArray()
     }
+
+    /**
+     *
+     */
+    fun canMakeArithmeticProgression(arr: IntArray): Boolean {
+        arr.sort()
+        val step = arr[1] - arr[0]
+        for (i in 1 until arr.size) {
+            if (arr[i] - arr[i - 1] != step) {
+                return false
+            }
+        }
+        return true
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-196/problems/last-moment-before-all-ants-fall-out-of-a-plank/
+     */
+    fun getLastMoment(n: Int, left: IntArray, right: IntArray): Int {
+        var t = 0
+        val leftAnt = left.toMutableList()
+        val rightAnt = right.toMutableList()
+        while (leftAnt.isNotEmpty() || rightAnt.isNotEmpty()) {
+            t++
+            var removeIndex = -1
+            leftAnt.forEachIndexed { index, i ->
+                if (i == 0) {
+                    removeIndex = index
+                } else {
+                    leftAnt[index] = i - 1
+                }
+            }
+            if (removeIndex >= 0) {
+                leftAnt.removeAt(removeIndex)
+            }
+            removeIndex = -1
+            rightAnt.forEachIndexed { index, i ->
+                if (i == n) {
+                    removeIndex = index
+                } else {
+                    rightAnt[index] = i + 1
+                }
+            }
+            if (removeIndex >= 0) {
+                rightAnt.removeAt(removeIndex)
+            }
+        }
+        return t - 1
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-196/problems/count-submatrices-with-all-ones/
+     */
+    fun numSubmat(mat: Array<IntArray>): Int {
+        val n = Array(mat.size + 1) { IntArray(mat[0].size + 1) { 0 } }
+        //预处理
+        for (i in 1 until mat.size) {
+            for (j in 1 until mat.size) {
+                if (mat[i][j] == 1) {
+                    n[i][j] = n[i - 1][j] + 1
+                } else {
+                    n[i][j] = 0
+                }
+            }
+        }
+        var ans = 0
+        var cnt = 0
+        val stack = IntArray(100000) { 0 }
+        var top = 0
+        for (i in 1..mat.size) {
+            cnt = 0
+            top = 0
+            for (j in 1..mat[0].size) {
+                cnt += n[i][j]
+                while (top != 0 && n[i][j] <= n[i][stack[top]]) {
+                    cnt -= (stack[top] - stack[top - 1]) * (n[i][stack[top]] - n[i][j])
+                    //(栈顶元素) - (第二大的元素)   =  距离
+                    //(栈顶元素) - (当前元素)  = 差值
+                    // 距离 × 差值 = 不作贡献的个数
+                    top--
+                }
+                ans += cnt
+                stack[++top] = j
+            }
+        }
+        return ans
+    }
 }

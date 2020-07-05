@@ -100,7 +100,7 @@ fun main() {
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
     val week = WeeklyContest()
-    week.getStrongest(intArrayOf(1, 2, 3, 4, 5), 2).print()
+    println(week.numSubmat(arrayOf(intArrayOf(1, 0, 1), intArrayOf(1, 1, 0), intArrayOf(1, 1, 0))))
 }
 
 
