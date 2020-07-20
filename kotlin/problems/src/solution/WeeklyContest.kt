@@ -290,4 +290,115 @@ class WeeklyContest {
         }
         return ans
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-197/problems/number-of-good-pairs/
+     */
+    fun numIdenticalPairs(nums: IntArray): Int {
+        var ans = 0
+        for (i in nums.indices) {
+            for (j in i + 1 until nums.size) {
+                if (nums[i] == nums[j]) {
+                    ans++
+                }
+            }
+        }
+        return ans
+    }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-197/problems/number-of-substrings-with-only-1s/
+     */
+    fun numSub(s: String): Int {
+        var ans = 0L
+        s.split("0").filter { it.isNotEmpty() }.forEach {
+            for (i in 1..it.length) {
+                ans += (it.length - i + 1)
+            }
+        }
+        return (ans % 1000000007).toInt()
+    }
+
+    private var probabilityAns = 0.0
+
+    /**
+     *
+     */
+    fun maxProbability(n: Int, edges: Array<IntArray>, succProb: DoubleArray, start: Int, end: Int): Double {
+        val matrix = Array(n) {
+            DoubleArray(it + 1) { 0.0 }
+        }
+        edges.forEachIndexed { index, ints ->
+            if (ints[0] > ints[1]) {
+                matrix[ints[0]][ints[1]] = succProb[index]
+            } else {
+                matrix[ints[1]][ints[0]] = succProb[index]
+            }
+        }
+        probabilityDfs(matrix, start, end, 1.0)
+        return probabilityAns
+    }
+
+    private fun probabilityDfs(matrix: Array<DoubleArray>, start: Int, end: Int, maxPath: Double) {
+        if (start == end) {
+            probabilityAns = max(probabilityAns, maxPath)
+            return
+        }
+        for (i in matrix.indices) {
+            if (i > start && matrix[i][start] > 0) {
+                probabilityDfs(matrix, i, end, matrix[i][start] * maxPath)
+            } else if (i < start && matrix[start][i] > 0) {
+                probabilityDfs(matrix, i, end, matrix[start][i] * maxPath)
+            }
+        }
+    }
+
+    fun numWaterBottles(numBottles: Int, numExchange: Int): Int {
+        var ans = numBottles
+        var empty = numBottles
+        while (empty / numExchange >= 1) {
+            ans += empty / numExchange
+            empty = empty / numExchange + empty % numExchange
+        }
+        return ans
+    }
+
+    fun countSubTrees(n: Int, edges: Array<IntArray>, labels: String): IntArray {
+        val ans = IntArray(n) { 0 }
+        val reach = IntArray(edges.size) { 0 }
+        countSubTreesDfs(0, edges, labels, ans, reach)
+        return ans
+    }
+
+    private fun countSubTreesDfs(
+        currentPoint: Int,
+        edges: Array<IntArray>,
+        labels: String,
+        ans: IntArray,
+        reach: IntArray
+    ): Map<Char, Int> {
+        ans[currentPoint] = 1
+        var hasSub = false
+        val currentMap = mutableMapOf(Pair(labels[currentPoint], 1))
+        for (i in edges.indices) {
+            if ((edges[i][0] == currentPoint || edges[i][1] == currentPoint) && reach[i] == 0) {
+                reach[i] = 1
+                val map = if (edges[i][0] == currentPoint) {
+                    countSubTreesDfs(edges[i][1], edges, labels, ans, reach)
+                } else {
+                    countSubTreesDfs(edges[i][0], edges, labels, ans, reach)
+                }
+                ans[currentPoint] += map[labels[currentPoint]] ?: 0
+                hasSub = true
+
+                map.keys.forEach {
+                    currentMap[it] = currentMap[it]?.plus(map[it]!!) ?: map[it]!!
+                }
+            }
+        }
+        if (!hasSub) {
+            return mapOf(Pair(labels[currentPoint], 1))
+        }
+        return currentMap
+    }
 }

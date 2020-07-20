@@ -100,7 +100,15 @@ fun main() {
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
     val week = WeeklyContest()
-    println(week.numSubmat(arrayOf(intArrayOf(1, 0, 1), intArrayOf(1, 1, 0), intArrayOf(1, 1, 0))))
+    week.countSubTrees(
+        4,
+        arrayOf(
+            intArrayOf(0, 2),
+            intArrayOf(0, 3),
+            intArrayOf(1, 2)
+        ),
+        "aeed"
+    ).print()
 }
 
 
