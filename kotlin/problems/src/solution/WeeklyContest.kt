@@ -401,4 +401,27 @@ class WeeklyContest {
         }
         return currentMap
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-199/problems/shuffle-string/
+     */
+    fun restoreString(s: String, indices: IntArray): String {
+        val ans = CharArray(s.length)
+        indices.forEachIndexed { index, i ->
+            ans[i] = s[index]
+        }
+        return String(ans)
+    }
+
+    fun minFlips(target: String): Int {
+        var ans = 0
+        var flag = 0
+        target.map { it - '0' }.forEachIndexed { index, i ->
+            if (i != flag) {
+                ans++
+                flag = if (flag == 0) { 1 } else { 0 }
+            }
+        }
+        return ans
+    }
 }
