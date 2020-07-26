@@ -413,13 +413,16 @@ class WeeklyContest {
         return String(ans)
     }
 
+    /**
+     *
+     */
     fun minFlips(target: String): Int {
         var ans = 0
         var flag = 0
-        target.map { it - '0' }.forEachIndexed { index, i ->
-            if (i != flag) {
+        target.map { it - '0' }.forEach {
+            if (it != flag) {
                 ans++
-                flag = if (flag == 0) { 1 } else { 0 }
+                flag = (flag + 1) % 2
             }
         }
         return ans

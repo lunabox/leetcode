@@ -1,6 +1,10 @@
 package solution
 
 import java.math.BigInteger
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.*
 
 class NumberProblems {
@@ -1189,5 +1193,26 @@ class NumberProblems {
             }
         }
         return ans.toList()
+    }
+
+    /**
+     * https://leetcode-cn.com/problems/sliding-window-maximum/
+     */
+    fun maxSlidingWindow(nums: IntArray, k: Int): IntArray {
+        val queueIndex = LinkedList<Int>()
+        val ans = IntArray(nums.size - k + 1)
+        nums.forEachIndexed { index, i ->
+            while (queueIndex.isNotEmpty() && nums[queueIndex.last] < i) {
+                queueIndex.removeLast()
+            }
+            queueIndex.addLast(index)
+            if (queueIndex.first == index - k) {
+                queueIndex.removeFirst()
+            }
+            if (index >= k - 1) {
+                ans[index - k + 1] = nums[queueIndex.first]
+            }
+        }
+        return ans
     }
 }
