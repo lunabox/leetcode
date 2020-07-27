@@ -365,41 +365,40 @@ class WeeklyContest {
 
     fun countSubTrees(n: Int, edges: Array<IntArray>, labels: String): IntArray {
         val ans = IntArray(n) { 0 }
-        val reach = IntArray(edges.size) { 0 }
-        countSubTreesDfs(0, edges, labels, ans, reach)
+        val reach = BooleanArray(edges.size) { false }
+        val edgesMap = HashMap<Int, MutableList<Int>>()
+        edges.forEach {
+            val list0 = edgesMap.getOrDefault(it[0], mutableListOf())
+            val list1 = edgesMap.getOrDefault(it[1], mutableListOf())
+            list0.add(it[1])
+            list1.add(it[0])
+            edgesMap[it[0]] = list0
+            edgesMap[it[1]] = list1
+        }
+        countSubTreesDfs(0, edgesMap, labels, ans, reach)
         return ans
     }
 
     private fun countSubTreesDfs(
         currentPoint: Int,
-        edges: Array<IntArray>,
+        edges: Map<Int, List<Int>>,
         labels: String,
         ans: IntArray,
-        reach: IntArray
-    ): Map<Char, Int> {
-        ans[currentPoint] = 1
-        var hasSub = false
-        val currentMap = mutableMapOf(Pair(labels[currentPoint], 1))
-        for (i in edges.indices) {
-            if ((edges[i][0] == currentPoint || edges[i][1] == currentPoint) && reach[i] == 0) {
-                reach[i] = 1
-                val map = if (edges[i][0] == currentPoint) {
-                    countSubTreesDfs(edges[i][1], edges, labels, ans, reach)
-                } else {
-                    countSubTreesDfs(edges[i][0], edges, labels, ans, reach)
-                }
-                ans[currentPoint] += map[labels[currentPoint]] ?: 0
-                hasSub = true
-
-                map.keys.forEach {
-                    currentMap[it] = currentMap[it]?.plus(map[it]!!) ?: map[it]!!
+        reach: BooleanArray
+    ): IntArray {
+        val counts = IntArray(26)
+        reach[currentPoint] = true
+        counts[labels[currentPoint] - 'a']++
+        edges[currentPoint]?.forEach {
+            if (!reach[it]) {
+                val r = countSubTreesDfs(it, edges, labels, ans, reach)
+                r.forEachIndexed { index, i ->
+                    counts[index] += i
                 }
             }
         }
-        if (!hasSub) {
-            return mapOf(Pair(labels[currentPoint], 1))
-        }
-        return currentMap
+        ans[currentPoint] = counts[labels[currentPoint] - 'a']
+        return counts
     }
 
     /**
