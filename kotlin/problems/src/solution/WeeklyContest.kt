@@ -1,5 +1,8 @@
 package solution
 
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.HashMap
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -466,5 +469,112 @@ class WeeklyContest {
             }
         }
         return arr[maxIndex]
+    }
+
+    fun findKthPositive(arr: IntArray, k: Int): Int {
+        val flag = IntArray(3000) { 0 }
+        arr.forEach {
+            flag[it - 1] = 1
+        }
+        var count = 0
+        flag.forEachIndexed { index, i ->
+            if (i == 0) {
+                count++
+            }
+            if (count == k) {
+                return index + 1
+            }
+        }
+        return 1
+    }
+
+    fun canConvertString(s: String, t: String, k: Int): Boolean {
+        if (s.length != t.length) {
+            return false
+        }
+        val dis = IntArray(s.length) { 0 }
+        t.forEachIndexed { index, c ->
+            dis[index] = c - s[index]
+        }
+        val flag = BooleanArray(k + 1) { false }
+        dis.forEach { i ->
+            if (i == 0) {
+                return@forEach
+            }
+            var n = i
+            if (n > k) {
+                return false
+            }
+            while (n < 0 || flag[n]) {
+                n += 26
+                if (n > k) {
+                    return false
+                }
+            }
+            if (n > k) {
+                return false
+            }
+            flag[n] = true
+        }
+        return true
+//        dis.forEachIndexed { index, i ->
+//            var n = i
+//            while (n < 0) {
+//                n += 26
+//            }
+//            dis[index] = n
+//        }
+//        dis.sort()
+//        dis.forEachIndexed { index, i ->
+//            if (i > k) {
+//                return false
+//            }
+//            var n = i
+//            var has = false
+//            do {
+//                for (j in 0 until index) {
+//                    if (dis[j] == n) {
+//                        n += 26
+//                        has = true
+//                        break
+//                    }
+//                }
+//            } while (has)
+//            dis[index] = n
+//        }
+//        return true
+    }
+
+    fun minInsertions(s: String): Int {
+        var left = 0
+        var right = 0
+        var index = 0
+        val q = Stack<Char>()
+        while (index < s.length) {
+            if (s[index] == '(') {
+                q.push(s[index])
+            } else if (s[index] == ')') {
+                if (index + 1 < s.length) {
+                    if (q.isNotEmpty()) {
+                        q.pop()
+                    } else {
+                        left++
+                    }
+                    if (s[index + 1] == ')') {
+                        index++
+                    } else {
+                        right++
+                    }
+                } else if (q.isNotEmpty()) {
+                    q.pop()
+                    right++
+                } else {
+                    right++
+                    left++
+                }
+            }
+            index++
+        }
+        return left + right + q.size * 2
     }
 }

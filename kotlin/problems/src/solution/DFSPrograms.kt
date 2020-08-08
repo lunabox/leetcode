@@ -1,5 +1,7 @@
 package solution
 
+import com.sun.org.apache.xpath.internal.operations.Bool
+
 class DFSPrograms {
     /**
      * https://leetcode-cn.com/problems/number-of-islands/
@@ -29,9 +31,33 @@ class DFSPrograms {
     }
 
     /**
-     *
+     * https://leetcode-cn.com/problems/partition-equal-subset-sum/
      */
-    fun solve(board: Array<CharArray>): Unit {
+    fun canPartition(nums: IntArray): Boolean {
+        val sum = nums.sum()
+        if (sum % 2 == 1) {
+            return false
+        }
+        val half = sum / 2
+        nums.sortDescending()
+        if (nums[0] > half) {
+            return false
+        }
+        return partitionDfs(nums, 0, half)
+    }
 
+    private fun partitionDfs(nums: IntArray, index: Int, sum: Int): Boolean {
+        if (sum == 0) {
+            return true
+        }
+        if (sum < 0) {
+            return false
+        }
+        for (i in index until nums.size) {
+            if (partitionDfs(nums, i + 1, sum - nums[i])) {
+                return true
+            }
+        }
+        return false
     }
 }
