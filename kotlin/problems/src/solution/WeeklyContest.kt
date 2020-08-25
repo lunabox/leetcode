@@ -577,4 +577,90 @@ class WeeklyContest {
         }
         return left + right + q.size * 2
     }
+
+    fun makeGood(s: String): String {
+        val buffer = mutableListOf<Char>()
+        s.forEach { buffer.add(it) }
+        var done: Boolean
+        do {
+            done = true
+            for (i in 0 until buffer.size - 1) {
+                if ((buffer[i].toLowerCase() == buffer[i + 1].toLowerCase()) &&
+                    ((buffer[i].isLowerCase() && buffer[i + 1].isUpperCase()) ||
+                            (buffer[i + 1].isLowerCase() && buffer[i].isUpperCase()))
+                ) {
+                    buffer.removeAt(i)
+                    buffer.removeAt(i)
+                    done = false
+                    break
+                }
+            }
+        } while (!done)
+        val ans = StringBuffer()
+        buffer.forEach { ans.append(it) }
+        return ans.toString()
+    }
+
+    fun findKthBit(n: Int, k: Int): Char {
+        val ans = StringBuffer()
+        ans.append('0')
+        repeat(n - 1) {
+            val currentLength = ans.length
+            ans.append('1')
+            for (i in currentLength - 1 downTo 0) {
+                ans.append(if (ans[i] == '0') '1' else '0')
+            }
+        }
+        return ans[k - 1]
+    }
+
+    /**
+     *
+     */
+    fun maxNonOverlapping(nums: IntArray, target: Int): Int {
+        val map = HashMap<Int, Int>()
+        map[0] = 1
+        var ans = 0
+        var curSum = 0
+        nums.forEach { i ->
+            curSum += i
+            ans += map.getOrDefault(curSum - target, 0)
+            map[curSum] = map.getOrDefault(curSum, 0) + 1
+        }
+        return ans
+    }
+
+    fun threeConsecutiveOdds(arr: IntArray): Boolean {
+        for (i in 0..arr.size - 3) {
+            if (arr[i] % 2 == 1 && arr[i + 1] % 2 == 1 && arr[i + 2] % 2 == 1) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun minOperations(n: Int): Int {
+        var ans = 0
+        repeat(n / 2) {
+            ans += n - 2 * it - 1
+        }
+        return ans
+    }
+
+    fun thousandSeparator(n: Int): String {
+        val ans = StringBuffer()
+        val m = n.toString()
+        var count = 0
+        for (i in m.length - 1 downTo 0) {
+            if (count == 3) {
+                ans.append(".")
+                count = 0
+            }
+            ans.append(m[i])
+            count++
+        }
+        return ans.reverse().toString()
+    }
+
+
 }
