@@ -101,7 +101,7 @@ fun main() {
 //    }
 //    println(sim.coinChange(intArrayOf(2,6), 7))
     val week = WeeklyContest()
-    println(week.maxDistance(intArrayOf(1, 2, 3, 4, 7), 3))
+    println(week.getMaxLen(intArrayOf(1, 2, 3, 5, -6, 4, 0, 10)))
 //    println(week.getWinner(intArrayOf(2, 1, 3, 5, 4, 6, 7), 2))
 //    val dfs = DFSPrograms()
 //    println(dfs.canPartition(intArrayOf(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,100)))

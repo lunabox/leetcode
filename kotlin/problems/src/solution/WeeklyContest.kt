@@ -662,5 +662,50 @@ class WeeklyContest {
         return ans.reverse().toString()
     }
 
+    fun containsPattern(arr: IntArray, m: Int, k: Int): Boolean {
+        repeat(m) { start ->
+            var current = ""
+            var count = 0
+            for (i in start until arr.size - m + 1 step m) {
+                val key = StringBuffer()
+                arr.slice(IntRange(i, i + m - 1)).forEach { key.append(it) }
+                if (key.toString() != current) {
+                    current = key.toString()
+                    count = 1
+                } else {
+                    count++
+                }
+                if (count >= k) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
+    fun getMaxLen(nums: IntArray): Int {
+        var maxLength = 0
+        var currentLength = 0
+        var positive = true
+        nums.forEach { i ->
+            if (i == 0) {
+                currentLength = 0
+//                positive = true
+            } else if (i > 0) {
+                currentLength++
+//                if (!positive) {
+//                    currentLength = 1
+//                }
+            } else {
+                if (positive) {
+                    positive = false
+                } else {
+                    currentLength += 2
+                    positive = true
+                }
+            }
+            maxLength = max(maxLength, currentLength)
+        }
+        return maxLength
+    }
 }
