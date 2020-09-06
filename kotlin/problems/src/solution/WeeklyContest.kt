@@ -708,4 +708,31 @@ class WeeklyContest {
         }
         return maxLength
     }
+
+    /**
+     * https://leetcode-cn.com/contest/weekly-contest-205/problems/replace-all-s-to-avoid-consecutive-repeating-characters/
+     */
+    fun modifyString(s: String): String {
+        val chars = s.toCharArray()
+        val flag = BooleanArray(26)
+        chars.forEachIndexed { index, c ->
+            flag.fill(false)
+            if (c == '?') {
+                if (index > 0 && chars[index - 1] != '?') {
+                    flag[chars[index - 1] - 'a'] = true
+                }
+                if (index < chars.size - 1 && chars[index + 1] != '?') {
+                    flag[chars[index + 1] - 'a'] = true
+                }
+                flag.forEachIndexed flag@{ i, b ->
+                    if (!b) {
+                        chars[index] = 'a' + i
+                        return@flag
+                    }
+                }
+            }
+        }
+        return String(chars)
+    }
+
 }
