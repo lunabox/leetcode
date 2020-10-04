@@ -735,4 +735,15 @@ class WeeklyContest {
         return String(chars)
     }
 
+    fun specialArray(nums: IntArray): Int {
+        nums.sort()
+        for (i in 1..nums.size) {
+            val s = nums.count { it >= i }
+            if (s == i) {
+                return s
+            }
+        }
+        return -1
+    }
+
 }
