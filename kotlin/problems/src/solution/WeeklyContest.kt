@@ -746,4 +746,16 @@ class WeeklyContest {
         return -1
     }
 
+    fun slowestKey(releaseTimes: IntArray, keysPressed: String): Char {
+        var ansChar = keysPressed[0]
+        var ansTime = releaseTimes[0]
+        for (i in 1 until releaseTimes.size) {
+            val time = releaseTimes[i] - releaseTimes[i - 1]
+            if (time > ansTime || (time == ansTime && keysPressed[i] > ansChar)) {
+                ansChar = keysPressed[i]
+                ansTime = time
+            }
+        }
+        return ansChar
+    }
 }

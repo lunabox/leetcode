@@ -3,7 +3,10 @@ import java.util.*;
 
 public class LeetCode {
 
+    public void test() {
+        int[][] x = new int[2][];
 
+    }
     public int[] rank(int[] a, int[] b) {
         Arrays.sort(a);
 
